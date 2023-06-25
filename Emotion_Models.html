@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Emotion Models</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+      <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Header -->
+      <header id="header" class="alt">
+        <a href="index.html" class="logo">
+          <strong>Neurocognition</strong>
+          <span>
+            <weak>|</weak>
+            <span>Exploratory Data Science</span>
+            <br />
+            <nav style="position: fixed; right: 0em;">
+              <a href="#menu">Menu</a>
+            </nav>
+      </header>
+      <!-- Menu -->
+	  <nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="Emotion_Models.html">Emotion Models</a></li>
+			<li><a href="Biomech_Emotions.html">Biomechanics of Emotion</a></li>
+			<li><a href="Covid.html"> Forecasting Timeseries Data & Covid Cases </a></li>
+			<li><a href="index.html"> Data Wrangling & Chess Analysis </a></li>	
+			<li><a href="index.html"> Regression, Dimension Reduction & US Mass Shooting Victims </a></li>
+			<li><a href="neurocog_UW.html">NeuroCog Lab at UW</a></li>
+		</ul>
+	</nav>
+	  
+      	<div id="main" class="alt">
+        	<section id="one">
+         	 <div class="inner">
+          	  <header class="major">
+              <h1>Emotion Models</h1>
+            </header>
+            <style>
+              .parallax {
+                background-image: url("images/Emotion_Faces.png");
+                min-height: 400px;
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: repeat;
+                background-size: cover;
+              }
+            </style>
+            <div class="parallax"></div>
+		</br>
+	</br>
+            <p>It's a little ironic trying to define such an abstract concept, <i>emotion</i>, into a substantive item. But we must be able to define emotions and different types of emotions in order to study them. Kandel (in his textbook which I'm sure all neuroscience students have read at some point) describes emotions as "automatic, largely unconscious behavioral and cognitive responses triggered when the brain detects a positively or negatively charged significant stimulus"* (p. 1079) (Kandel, 2013). These automatic responses occur both within the brain and the body, influencing cognitive functions such as attention and memory. Now, what we as humans percieve as the end result of these emotional processes is what Kandel calls <i>feelings</i>. </p>
+            <br>
+            <blockquote>
+              <l style="font-size:small" ;>
+                <small>
+                  <i>*This may not be the most correct or accurate definition of emotion. Personally, I view emotions as the things we feel to make us do what we do. But for sake of some shared ground, we'll take it.</i>
+                </small>
+              </l>
+              </span>
+            </blockquote>
+            <br>
+            <p>OK, so we've defined emotion, but that was such a generic definition. What we usually think of when we're referring to emotions are "Happy, Sad, Angry, Fearful" etc. The question now becomes: How do we differentiate these emotions from one another? </p>
+            <p> You can say that emotions are different due to different emotions having different unique, distinctive signals (facial expressions of different emotions), distinctive physiology (heart rate, blood flow, respiration rate) and have distinctive antecedent events (what causes someone to feel that emotion?). This line of thinking is what aligns with the <i>Discrete</i> model of emotion as argued by Paul Ekman in his paper <a href="https://www.tandfonline.com/doi/abs/10.1080/02699939208411068">
+                <i>An Argument for Basic Emotions</i>
+              </a>(Ekman, 1992). </p>
+            <p>But that is not the only way we can look at emotions. Even Ekman argues that while emotions may be distinctive and different from one another, there are still basic properties of emotions that are shared between one another. In terms of distinct physiology and distinct antecedent events, many emotions can share properties with one another. Happiness and anger can both lead to increased heart rate and increased blood flow. Anger and sadness may have similar antecedent events and, as <a href="https://news.northeastern.edu/2021/08/20/you-cant-determine-emotion-from-someones-facial-expression-and-neither-can-ai/">Lisa Feldman Barret</a> points out, there are lots of cases of ambiguity when trying to categorize emotions purely based on facial expressions as many different facial expressions are <a href="https://www.npr.org/2012/11/30/166184008/victory-or-defeat-emotions-arent-all-in-the-face">shared among different emotions</a> (Elation and defeat can have similar facial expressions, despite being obviously different emotions). </p>
+            <p>Thus, this gives rise to the dimensional model of emotions. This model posits that emotions all share some fundamental property (or properties) and it is changes in these properties of the dimensions that allow different emotions to be separated from one another </p>
+            <p>
+            So, lets talk about dimensional models.
+            </p>
+
+			<header class="major" >
+				<h1>Dimensional Models</h1>
+			</header>
+			<h2>Pleasure, Arousal and Dominance: The PAD Model of Emotions</h2>
+
+			<p>First developed by Russell and Mehrabain (1977) the PAD model depicts emotions as a three dimensional model which varies on the bipolar axes of Pleasure, Arousal and Dominance.</p>	
+			
+			<p>Pleasure (or valence as used by other similar models) is well, Pleasure. Emotions vary on this axis depending on how positive or negative that certain emotion makes you feel. </p>
+
+			<p>Arousal is how activated or inactivated the emotion makes you feel. Anger and Joy/Excitement both give rise to high levels of Arousal but differ in their Pleasure.  </p>
+				
+			<br> </br>
+
+			 <blockquote> <l style="font-size:small";><small><i>Small note here, if we just stuck with two dimensions of Pleasure/Arousal we would be using effectively the Circumplex Model of Affect, used in emotion recognition and facial recognition research. However, it can be argued that using just two emotions may not be enough to pull apart differences between certain emotions. </i></small></l> </blockquote>
+
+			<p>Dominance, the third dimension, is how influential or "in control" you feel while experiencing a certain emotion. Fear and Anger can both have similar levels of Pleasure (low) and Arousal (high). Thus using just two dimensions, you can see that the emotions of Fear and Anger may be similarly categorized, this can be a problem as emotions of fear and anger are quite different from one another. It is only when Dominance is incorporated, that the emotions of Fear and Anger start to be pulled apart and differentiated. Fear has low Dominance (low control and influence over the situation) and Anger has high Dominance (high control and influence over the situation). </p>
+			<p> Below, is the PAD model visualized. The emotions depicted are derived from <a href="https://psycnet.apa.org/record/1978-23131-001"> Russell & Mehrabain (1977) </a> who used these three-dimensional bipolar axes to determine the spatial location of over 150 emotions. X represents Pleasure, Y represents Arousal and Z represents Dominance. </p>
+				
+				<p><l style="font-size: small";><small>Double click to isolate a specific emotion and remove all others. Single click to add more using the label on the right. Left click and drag to navigate the graph across the three dimensions. Click the home button on top of the graph to reset.</small></l></p>
+
+			  <p align ="center"><iframe src="Pad3py.html" width="1300" height="800" title="PAD Model Full"></iframe></p>
+
+			<p> Some interesting observations can be made by just looking over this PAD model. Over 150 emotions examined leaves a lot of room for overlapping emotions, and there seems to be very vague "descriptive" emotions. For example, anger is easy to define (or feel), but what seems to be the difference, if any, between <span class="blue_text"> <i>cold anger</i> </span> and <span class="red_text"> <i>angry but detached</i> </span>. Numerically, there seems to be not much separating anger and <span class="blue_text"> <i>cold anger</i> </span> (negative Pleasure, positive Arousal, positive Dominance) however,  <span class="red_text"> <i>angry but detached</i> </span> seems to occupy a different region than the previous two (positive Pleasure, positive Arousal and negative Dominance). Somehow, being detached from the emotion removed its negative Pleasure association but also changed its influence (possibly due to semantics, <b>detached</b> already implies loss of control or influence from the situation, hence, the negative Dominance values). </p>
+			
+			<p><l> At the end of the day, this depiction of emotion ultimately rests on the self-reported values of Pleasure, Arousal and Dominance given by the subjects. Currently, without going deep into brain imaging, we do not really have a way to physiologically describe different emotions. Sure, we can use facial expressions, and changes in physiological processes (HRV, R-R intervals, pupil dialation, and electrodermal skin response) but those are not without their own problems themselves. Ultimately, HRV, pupil dilation response, and EDA measure, Arousal and they <a href="https://pubmed.ncbi.nlm.nih.gov/28213189/"> only start to show strong correlations once a certain Arousal threshold has been crossed. </a></l></p>
+
+			<p>However, that does not mean that there haven't been attempts to describe emotions using physiological/neurobiological methods. </p>
+
+			<header class="major">
+				<h1>Lovheim's Cube of Emotions</h1>
+			</header>
+
+			<h2>Neurobiological model of Emotions </h2>				
+									<p> Similar to the PAD in the sense that this model attempts to depict emotions on a series of dimensions, the Lovheim's model posits that emotions rise as a result of different concentrations of neurotransmitters in the brain. Namely, the neurotransmitters of <b>Serotonin (5HT)</b>, <b>Norepinephrine (NE) </b>, and <b>Dopamine (DA)</b> are the main constituent dimensions to this model that describes different emotions. 
+										
+										<br> </br>
+										
+									Emotions play a role not just in making us feel different things but they have an evolutionary component too. The fight or flight (flight or fight?) is not just a physiological response to danger and threat but an emotional one too. Fear, terror, distress can all be present during life threatning (or percieved life threatning) scenarios and it makes sense to think of emotions as a direct biological outcome of chemical changes in the brain. After all, something has to be changing in the brain in order for us to feel differently than we did just moments ago.  </p>
+
+									<p><l style="font-size: small";><small>Double click to isolate a specific emotion and remove all others. Single click to add more using the label on the right. Left click and drag to navigate the graph across the three dimensions. Click the home button on the top right of the graph to reset.</small></l></p>
+									
+									<p align ="center"><iframe src="LH_Graph_Full.html" width="900" height="600" title="PAD Model Full"></iframe></p>
+
+									<p>The <i>theoretical</i> justification behind this model varies from "skeptically plausible" to "handwavy science" but it still remains quite an interesting model to discuss and theorize through. Take for example Dopamine (DA), being related with the emotions of anger/fear. According to this model, high <b>Dopamine</b> is present when experiencing these two emotions. From research into clinical populations, those with Parkinson's Disease (PD) (who are typically Dopamine deficient thus DA concentration in brain is low) have trouble recognizing anger and facial expressions of anger. Moreover, other clinical populations such as those with clinical depression (low serotonergic population) show increase in frequency of anger attacks when given medication that increases Dopamine uptake in the brain. These two observations and other similar ones is why Lovheim put anger as dependent on the neurotransmitter Dopamine. <a href="https://pubmed.ncbi.nlm.nih.gov/22153577/" > Now, I'm not going to re-state all of Lovheim's arguments here, check out the paper for yourself. </a></p>
+									
+									<p>Other rationale for emotions and potential neurobiological links ( such as Shame being depicted as low of all three neurotransmitters) are not as strong. Taking the example of Shame, here Lovheim simply uses the description of Shame made by the psychologist Silvan Tomkins where <a href="https://psycnet.apa.org/record/1965-07714-000"> "shame strikes deepest into the heart of man... [the individual feels] naked, defeated, alineated, lacking in dignity or worth" </a> as justification for this emotion being low in all three neurotransmitter quantitites. This description of Shame is representative of how one may feel when there is low amounts of Dopamine, Serotonin and Norepinephrine as none of the "expected" effects of any of these neurotransmitters are felt during shame. Although, the justification may not be as strong as Dopamine and Anger, using this theoretical model there has to be some emotion that is representative of a low concentrations of all three axes. It's hard to think of other emotions that are fitting when all three neurotransmitters are low.</p>
+
+									<p> New theories and ideas like the Lovheim Model become platforms that we can use to climb upon and ask even more interesting questions. Standing on the platform of this model, we can view emotions as being tied to biological neurotransmitters. These biological neurotransmitters have their own consequences outside of emotion. We know that a lack of Dopamine in the brain (seen in Parkinson's patients) can cause motor deficiencies; and so another platform rises that we can climb upon. Using the first platform of "emotions can be caused by changes in neurotransmitters in the brain", and the second platform of the "neurotransmitters can cause changes in motor outputs seen in the body and movements", we finally can ask an important question: <a href="Biomech_Emotions.html">Can emotions change our motor outputs? OR Can emotions change the way we move?</a></p>
+
+
+
+			</div>
+	</section>
+        </div>
+        	</section>
+			
+    </div>
+</div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
