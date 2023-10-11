@@ -1667,8 +1667,8 @@ display: none;
 <div style="page-break-after: always;"></div>
 <div id="introduction" class="section level3">
   <h3>Regression, Dimension Reduction & US Mass Shooting Victims</h3>
-  <p>The main goal with this project was to look at the deadliness of a
-  mass shooting event across the United States. To specify here, this
+  <p>The goal of this project was to look at the factors behind the 'deadliness' of a
+  mass shooting event across the United States. To specify, this
   analysis does not predict the number of mass shooting events, it only
   looks at what factors make it more or less deadly once they occur. This
   analysis also only looks at mass shooting events as defined by The
@@ -1692,17 +1692,15 @@ display: none;
     </p>
   <br> <br>
   <p><a href="#Corr Analysis"> Jump to analysis </a> </p>
-  <p>The approach involved first defining the criterion for evaluation of
-  the violent measure of an event, calculated by the sum of total injured
-  and total killed (the response variable). Then it involved gathering all
-  explanatory variables from different sources and combining it all to a
-  large rectangular dataset, which is done below. To gather the
+  <p>First we need to define the criterion for evaluation of
+  the violent measure of an event, or it's deadliness. This was calculated by the sum of total injured
+  and total killed in an event (the response variable). To gather the
   explanatory variables, I used the “Full Dataset” and “Community Dataset”
   from the Violence Project Mass Shooter Databse to initialize the first
-  few explanatory variables. Then I looked at appending other sources of
-  data to this base set such as gun ownership rates, gun law strictness in
-  the state, and the party affiliation of the state in the last federal
-  election. The statistical approaches I’d like to perform are linear
+  few sets of explanatory variables. Then I looked at appending other sources of
+  data to this base set such as gun ownership rates, gun law strictness (by state),
+  and the party affiliation of the state in the last federal
+  election. The statistical analyses performed were linear
   correlation, stepwise regression and PCA of each of the explanatory
   variables and how they correlate with the response variable and to see
   which combination of variables best explained the deadliness of a mass
@@ -1718,9 +1716,7 @@ display: none;
   etc.) instead of numbers which is used in the CSV currently, so the most
   modern values were used as a default. Federal election data also used
   the 2020 election numbers as I wanted a general sense of how violent
-  shootings differed from a “red” state vs a “blue” state. If I had more
-  time I would look to use the election data from the most recent federal
-  election to the shooting and then make the comparisons.</p>
+  shootings differed from a “red” state vs a “blue” state.</p>
 <pre class="r"><code># import data from xlsx (not csv)
 
 # the FullDB and CommunityDB was a specialized dataset that was acquired by
@@ -1793,7 +1789,8 @@ GunLawScorecard &lt;- data.frame(GunLawScorecard)
 CommunityDB &lt;- data.frame(CommunityDB) </code></pre>
 
 
-<h2> I've removed the code and tables that display the Mass Shooter Database aquired from the Violence Project as I require explicit permission from the org to display any data that reveals their database. Upon permission I will re-upload the code used to clean and merge the datasets.</h2> 
+<h2> I've removed the code and tables that display the Mass Shooter Database aquired from the Violence Project as I require explicit permission from the org to display any data that reveals their database. 
+  Upon permission I will re-upload the code used to clean and merge the datasets.</h2> 
 <br>
   
 <p>The data was collected using the download links provided in the
