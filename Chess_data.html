@@ -1667,14 +1667,14 @@ display: none;
 <div class="container-fluid main-container">
 
 <div style="page-break-after: always;"></div>
-<div id="new-york-times-covid-datasource" class="section level1">
+<div id="wrangling-and-chess-analysis" class="section level1">
 <h1>Wrangling and Chess Analysis</h1>
 <p> <a href="https://database.lichess.org/" class="uri"> Data Source </a></p>
 <br>
-<p>This analysis focuses on extracting data from an unusual form and making usable datasets from them. Chess data comes in a '.pgn' file which is a specialized filetype used to record the information of any chess game. This project used publically available pgn files from Lichess.</p>
+<p>This analysis focuses on extracting data from an unusual/irregular form (i.e. not nice and rectangular in shape, with each observation in a different row and each column representing a differnt variable) and making usable datasets from them. Chess data comes in a '.pgn' file which is a specialized filetype used to record the information of any chess game. This project used publically available pgn files from Lichess. The first section goes into detail about how we manipulate the irregular '.pgn' file to make a regular, retangular dataset to analyze. If you want to skip this part and just go to the analysis, click below. Otherwise, lets talk about how we can deal with an irregular data structure.</p>
 <p><a href="#ELO analysis"> Jump to analysis </a> </p>
 <br>
-<p> If we open a pgn file (using a standard notepad opener), we see that the file can contain thousands of different games. Usually the first 17 or so lines of the file contain the metadata information of each game played (highlighted in blue). This metadata contains the names of the players, their ELO (ranking, higher is better), UTC date and time, their elo rating difference and a whole lot of other information. There then is a linebreak and the following line (highlighted in orange) contains info about the actual moves played and it is all contained within one single line. </p>
+<p> If we open a pgn file (using a standard notepad opener), we see that the file can contain data on thousands of different games. Usually the first 17 or so lines of the file contain the metadata information of each game played (highlighted in blue). This metadata contains the names of the players, their ELO (a score representing their ranking, higher is better), UTC date and time, their ELO rating difference and a whole lot of other information. There then is a linebreak and the following line (highlighted in orange) contains info about the actual moves played and it is all contained within one single line (but depicted as a wrapped line). </p>
 
 <div>
   <img src="./images/pgn_example.png">
@@ -1686,7 +1686,7 @@ display: none;
 
 <br>
 
-<p>So, now we need to separate the metadata from the actual moves played and create a dataset that takes all this "columnar list" data and makes it into a rectangular format; where each row is a different game played, and each column contains the metadata info and the actual moves played.</p>
+<p>So, now we need to separate the metadata from the actual moves played and create a dataset that takes all this "column list" data and make it into a rectangular format; where each row is a different game played, and each column contains the metadata info and the actual moves played.</p>
 
 
 
@@ -1910,7 +1910,7 @@ newtest &lt;- cbind(newtest, move_line)
 
 Cleaned_chess_classic &lt;- cbind(Cleaned_chess_classic, tag_line, move_line)</code></pre>
 <br>
-<p> Now we have a more proper dataset that we can work with, if we check the 'Cleaned_chess_classic' table we see that each row is a separate game and all the metadata have now been placed in columns and filled in with their respective values. Essentially, this was using some clever string selection to first create variable names (in varnames) and using the similar method to create the values (in values) for the data that goes into each variable name. Finally, they're all merged together using the groupby() function alongside the pivot_wider() function. 
+<p> Now we have a more proper dataset that we can work with, if we check the 'Cleaned_chess_classic' table we see that each row is a separate game and all the metadata have now been placed in columns and filled in with their respective values. Essentially, this was using some clever string selection to first create variable names (in varnames) and using the similar method to create the values (in values) for the data that goes into each variable name. So varnames and values are two separate tables created. Finally, they're all merged together using the groupby() function alongside the pivot_wider() function. We're pivoting the original narrow column data with each row depicting a new variable, and pulling it apart across, widening it such that each column (going left to right) now represents the variables. 
 <br>
 <br>
 
@@ -1918,6 +1918,10 @@ Now lets start analyzing this data </p>
 <br> 
 <br>
 <h3 id = "ELO analysis"> How much ELO is playing first worth? </h3>
+<p> Say you're playing a chess match with your friend. You notice that they always go on about how much better than you they are because of their (just barely) higher ELO rating. But you also notice that whenever you play, they always go first. So, you think to yourself, I wonder how much ELO going first is worth? </p>
+  
+<p> Lets think about this problem a bit more. There is always a slight advantage going first in a chess match, white pieces tends to have slightly higher than 50% winrate and this is seen across all ELOs. This means, that there is some advantage to going first and thus, it should reflect on the ELO rating. We want to calculate what the ELO rating would be. To do this, we can think of this problem backwards, to achieve 50% winrate, what should the ELO differences between White and Black be? Thus, this ELO difference represents the ELO value that going first would be worth. </p>
+  
 <p> Lets create a linear model of the proportion of time the first player (white)
 wins as a function of the amount of higher rating the first player has
 over the second player. We'll use this model to determine how many rating
@@ -1984,7 +1988,7 @@ or the white pieces should be below 22 elo points compared to the black pieces
 in order to win 50% of the time.</code></pre>
 <p>Repeat the linear model from before, but filter() so that only games
 between players where both players have a 2000 rating or better. Does
-the pattern hold.</p>
+the pattern hold?.</p>
 <pre class="r"><code>filtered2k &lt;- filter(Ratings_worth, as.numeric(WhiteElo) &gt;= 2000 &amp; 
                        as.numeric(BlackElo) &gt;= 2000)
 
