@@ -2,9 +2,9 @@
 
 The repository for my personal website that showcases (some) of my projects that I've done so far. 
 
-Link for full website with all the details: https://ahomagai.github.io/
+Link for full website with (more!) details: https://ahomagai.github.io/
 
-### Some takeaways:
+### Highlights of my work:
 
 ## COVID 19 and Mortality (R & Forecasting time-series data )
 
@@ -13,13 +13,13 @@ Link for full website with all the details: https://ahomagai.github.io/
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/US%20State%20Mortality%20Rates%20across%20Normalized%20Avg%20Number%20of%20Trips.png)
 
 <br> </br>
-<p>Not really but this data takes into account all of the COVID 19 mortality from the beginning to end of 2023. Plenty of health measures, and the distribution of the vaccines in early 2021 may impact this. </p>
-<p> What about if we limit to just the 2020 year? </p>
+<p>Not really but this data takes into account all of the COVID 19 mortality from the beginning to end of 2023. Plenty of health policy and protective measures such as masking, physical distancing, air purification and the distribution of the vaccines in early 2021 may have an impact on this. </p>
+<p> But qhat about if we limit to just the 2020 year? </p>
 
 <br> </br>
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/2020_US_State_Mortality_Rates_by_Normalized_Average_Trips.png)
 
-<p> Now a more interesting story emerges, although the relationship is weak, r=0.34, there is some significant correlation between mortality rates and number of trips taken in 2020. Red dots represents states where mortality rate was >400 deaths per 100,000 and green dots represent mortality rates <200 per 100,000. Population density could for sure have played a role in these results but it is interesting that it isn't just more population / higher density -> higher deaths, as was the case with North Dakota being high in deaths with less than 1,000,000 in population. </p>
+<p> Now a more interesting story emerges, although the relationship is weak, r=0.34, p<0.05, there is some significant correlation between mortality rates and number of trips taken in 2020. Red dots represents states where mortality rate was >400 deaths per 100,000 and green dots represent mortality rates <200 per 100,000. Population density could for sure have played a role in these results but it is interesting that it isn't just more population / higher density -> higher deaths, as was the case with North Dakota being high in deaths with less than 1,000,000 in population. </p>
 
 <br> </br>
 ### Forecasting Covid 19 cases using autoregressive models 
@@ -46,8 +46,9 @@ Link for full website with all the details: https://ahomagai.github.io/
 
 ## Geospatial Data analysis (Tableau, Python) 
 <br></br> 
+Link to full analysis: https://ahomagai.github.io/Ont_Prov_Election_Insight.html
 
-<p>I think these two following graphs is really all you need to look at to get a sense of how different parties performed in the 2022 Provincial Election compared to the 2018 Election. (2025 election data is in development, don't you worry). </p>
+<p>I think these two following graphs is really all you need to look at to get a sense of how different parties performed in the 2022 Provincial Election compared to the 2018 Election. (2025 election data is in development, don't you worry). P.S. on the full analysis website both of these graphs are interactable. </p>
 
 ### Who took from who? 
 
@@ -63,6 +64,11 @@ Link for full website with all the details: https://ahomagai.github.io/
 <br></br>
 <p>Suffice to say, the biggest losers were the NDP; when they lost ridings, it was mostly to the PCP. The PCP managed to gain even more ground, recouping in 2022 many districts they'd lost in 2018 to NDP. </p>
 
-### How did each party perform in each riding? 
+### Change in %votes gathered from each party from 2018 - 2022 
+<br></br>
+![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/Voting%20Changes%20across%20Ontario's%20Election%20Districts.PNG)
+<br></br>
 
-{ % include_relative https://github.com/Ahomagai/Ahomagai.github.io/blob/main/Ont_Prov_Election_Insight.html %}
+<p> Point colors represent districts won by each party according to their respective colors. Values below 0 indicate reduction in votes 2022 compared to 2018 as a percentage of total votes cast in that riding. Lower is worse, higher is better.  <br> 
+
+  Overall, the NPD once again lost votes across a wide range of ridings with only a few being above 0 (gaining votes). Even in the ridings they'd won in 2022, their vote percentage compared to 2018 was lower. What the NDP lost, the LIB and PCP gain. However, with the performance of the LIB party in 2018, their 2022 results seem more like a regression to the mean rather than a substantial comeback. Finally, the PCP ride strong with most of their voting % teetring just above the 0% mark, showing an even stronger performance in 2022 compared to 2018.  </p>
