@@ -52,99 +52,70 @@
             </div>
          </section>
 
-         <!-- Highlights -->
-      <section><h2 id="highlights-of-my-work-">Highlights of my work:</h2>
-         <h3 id="covid-19-and-mortality-r-forecasting-time-series-data-">COVID 19 and Mortality (R &amp; Forecasting time-series data )</h3>
-         <h4 id="did-states-that-had-more-people-travel-during-the-pandemic-also-coincide-with-more-deaths-">Did states that had more people travel during the pandemic also coincide with more deaths?</h4>
-         <p><br> </br>
-         <img src="https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/US%20State%20Mortality%20Rates%20across%20Normalized%20Avg%20Number%20of%20Trips.png" alt="Alt text"></p>
-         <p><br> </br></p>
-         <p>Not really but this data takes into account all of the COVID 19 mortality from the beginning to end of 2023. Plenty of health policy and protective measures such as masking, physical distancing, air purification and the distribution of the vaccines in early 2021 may have an impact on this. </p>
-         <p> But qhat about if we limit to just the 2020 year? </p>
-         
-         <p><br> </br>
-         <img src="https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/2020_US_State_Mortality_Rates_by_Normalized_Average_Trips.png" alt="Alt text"></p>
-         <p> Now a more interesting story emerges, although the relationship is weak, r=0.34, p<0.05, there is some significant correlation between mortality rates and number of trips taken in 2020. Red dots represents states where mortality rate was >400 deaths per 100,000 and green dots represent mortality rates &lt;200 per 100,000. Population density could for sure have played a role in these results but it is interesting that it isn&#39;t just more population / higher density -&gt; higher deaths, as was the case with North Dakota being high in deaths with less than 1,000,000 in population. </p>
-         
-         <p><br> </br></p>
-         <h3 id="forecasting-covid-19-cases-using-autoregressive-models">Forecasting Covid 19 cases using autoregressive models</h3>
-         <p><br> </br></p>
-         <p> Let&#39;s look at some time-series forecasting data using an AutoRegressive Integrated Moving Average (ARIMA). Here I&#39;m using the NYT Covid Cases Dataset. Data was split into test and training set with prediction of the last 7 days of COVID-19 cases being the objective.  </p>
-         
-         <p><img src="https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/Forecasted%20COVID%20Cases.png" alt="Alt text"></p>
-         <p><br></br></p>
-         <p> With the seasonal (I assumed seasonality here with COVID cases rising and falling in conjunction with the geographic seasons) ARIMA model, we see that while the model tends to overestimate the actual cases (see table below) it is still within the 80th and 90th percentile bounds with a large deviation in accuracy in the 3rd day. </p>
-         
-         <table>
-         <thead>
-         <tr>
-         <th>Predicted Cases</th>
-         <th>Actual Cases</th>
-         <th>Accuracy</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr>
-         <td>148970.475</td>
-         <td>113283</td>
-         <td>1.3150294</td>
-         </tr>
-         <tr>
-         <td>83257.077</td>
-         <td>78852</td>
-         <td>1.055865</td>
-         </tr>
-         <tr>
-         <td>49906.312</td>
-         <td>14171</td>
-         <td>3.521722</td>
-         </tr>
-         <tr>
-         <td>3492.481</td>
-         <td>2200</td>
-         <td>1.587491</td>
-         </tr>
-         <tr>
-         <td>5437.599</td>
-         <td>4424</td>
-         <td>1.22911</td>
-         </tr>
-         <tr>
-         <td>21686.059</td>
-         <td>30449</td>
-         <td>0.71220</td>
-         </tr>
-         <tr>
-         <td>45567.099</td>
-         <td>31067</td>
-         <td>1.46673</td>
-         </tr>
-         </tbody>
-         </table>
-         <p><br></br></p>
-         <h3 id="geospatial-data-analysis-tableau-python-">Geospatial Data analysis (Tableau, Python)</h3>
-         <p><br></br> 
-         Link to full analysis: <a href="https://ahomagai.github.io/Ont_Prov_Election_Insight.html">https://ahomagai.github.io/Ont_Prov_Election_Insight.html</a></p>
-         <p>I think these two following graphs is really all you need to look at to get a sense of how different parties performed in the 2022 Provincial Election compared to the 2018 Election. (2025 election data is in development, don&#39;t you worry). P.S. on the full analysis website both of these graphs are interactable. </p>
-         
-         <h4 id="who-took-from-who-">Who took from who?</h4>
-         <p><br></br></p>
-         <p> This a nice way to showcase how each party performed overall in the 2022 election compared to 2018. Rows represent ridings won in 2018 &amp; columns represent ridings won in 2022 by different parties in their corresponding colors (Red=Liberal, Orange = NDP, Green = Green, Blue = Conservatives). Points outside the part diagonal represent losses or gains in ridings from each party from another. For example, if we look at the LIB row and NDP column, we see the Liberals lost 1 district they&#39;d won in 2018 to NDP in 2022 while the NDP lost 2 districts in 2022 to Liberals that they had won in 2018. </p>
-         
-         <p><img src="https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/Who%20took%20from%20who.PNG" alt="Alt text">
-         <br></br> </p>
-         <p><br></br></p>
-         <p>Suffice to say, the biggest losers were the NDP; when they lost ridings, it was mostly to the PCP. The PCP managed to gain even more ground, recouping in 2022 many districts they&#39;d lost in 2018 to NDP. </p>
-         
-         <h4 id="change-in-votes-gathered-from-each-party-from-2018-2022">Change in %votes gathered from each party from 2018 - 2022</h4>
-         <p><br></br>
-         <img src="https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/Voting%20Changes%20across%20Ontario&#39;s%20Election%20Districts.PNG" alt="Alt text">
-         <br></br></p>
-         <p> Point colors represent districts won by each party according to their respective colors. Values below 0 indicate reduction in votes 2022 compared to 2018 as a percentage of total votes cast in that riding. Lower is worse, higher is better.  <br> 
-         
-           Overall, the NPD once again lost votes across a wide range of ridings with only a few being above 0 (gaining votes). Even in the ridings they&#39;d won in 2022, their vote percentage compared to 2018 was lower. What the NDP lost, the LIB and PCP gain. However, with the performance of the LIB party in 2018, their 2022 results seem more like a regression to the mean rather than a substantial comeback. Finally, the PCP ride strong with most of their voting % teetring just above the 0% mark, showing an even stronger performance in 2022 compared to 2018.  </p>
-         
-   </section>
+      <!-- Highlights -->
+            <section style="padding-left: 2em;">
+               <h2 id="highlights-of-my-work-">Highlights of my work:</h2>
+               <h3 id="covid-19-and-mortality-r-forecasting-time-series-data-">COVID 19 and Mortality (R &amp; Forecasting time-series data )</h3>
+               <h4 id="did-states-that-had-more-people-travel-during-the-pandemic-also-coincide-with-more-deaths-">Did states that had more people travel during the pandemic also coincide with more deaths?</h4>
+               <p><br></p>
+               <img src="https://raw.githubusercontent.com/Ahomagai/Ahomagai.github.io/main/images/US%20State%20Mortality%20Rates%20across%20Normalized%20Avg%20Number%20of%20Trips.png" alt="Alt text">
+               <p><br></p>
+               <p>Not really, but this data includes COVID-19 mortality from early 2020 through 2023, so it's not specific enough to show effects of early pandemic behavior (increased travel) on mortality outcomes. Let’s look at mortality rates in 2020 only.</p>
+               <p><br></p>
+               <img src="https://raw.githubusercontent.com/Ahomagai/Ahomagai.github.io/main/images/2020_US_State_Mortality_Rates_by_Normalized_Average_Trips.png" alt="Alt text">
+               <p>Now a more interesting story emerges. This graph is positively correlated with COVID-19 mortality rates! The R2 value is about 0.20 with p &lt; 0.05. Although the effect size is moderate, this suggests that travel behavior in early pandemic years was somewhat correlated with worse COVID-19 outcomes.</p>
+               <p><br></p>
+               <h3 id="forecasting-covid-19-cases-using-autoregressive-models">Forecasting COVID-19 cases using autoregressive models</h3>
+               <p><br></p>
+               <p>Let’s look at time-series forecasting using ARIMA on a heavily hit province, Ontario, Canada.</p>
+               <img src="https://raw.githubusercontent.com/Ahomagai/Ahomagai.github.io/main/images/Forecasted%20COVID%20Cases.png" alt="Alt text">
+               <p><br></p>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Forecast Date</th>
+                        <th>Predicted Cases</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>2023-01-01</td>
+                        <td>1132</td>
+                     </tr>
+                     <tr>
+                        <td>2023-01-02</td>
+                        <td>1104</td>
+                     </tr>
+                     <tr>
+                        <td>2023-01-03</td>
+                        <td>1092</td>
+                     </tr>
+                     <tr>
+                        <td>2023-01-04</td>
+                        <td>1075</td>
+                     </tr>
+                     <tr>
+                        <td>2023-01-05</td>
+                        <td>1078</td>
+                     </tr>
+                  </tbody>
+               </table>
+               <p>ARIMA modeling with seasonal terms allowed for forecasting new case numbers across several weeks. Note that the pandemic is in a more stable phase by 2023, making this relatively easy to forecast!</p>
+               <br/>
+               <h3 id="geospatial-data-analysis-tableau-python-">Geospatial Data analysis (Tableau, Python)</h3>
+               <br/>
+               <p>Click below to see full Tableau dashboard and exploratory data analysis code written in Python:</p>
+               <a href="https://ahomagai.github.io/Ont_Prov_Election_Insight.html">Full analysis link</a>
+               <h4 id="who-took-from-who-">Who took from who?</h4>
+               <br/>
+               <img src="https://raw.githubusercontent.com/Ahomagai/Ahomagai.github.io/main/images/Who%20took%20from%20who.PNG" alt="Alt text">
+               <br/>
+               <h4 id="change-in-votes-gathered-from-each-party-from-2018-2022">Change in %votes gathered from each party from 2018 - 2022</h4>
+               <br/>
+               <img src="https://raw.githubusercontent.com/Ahomagai/Ahomagai.github.io/main/images/Voting%20Changes%20across%20Ontario's%20Election%20Districts.PNG" alt="Alt text">
+               <br/>
+            </section>
+
          
          <h2>Detailed analysis in any of the projects above (and more) </h2>
          <!-- Main -->
