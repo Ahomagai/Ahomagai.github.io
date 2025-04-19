@@ -14,7 +14,7 @@ Link for full website with (more!) details: https://ahomagai.github.io/
 
 <br> </br>
 <p>Not really but this data takes into account all of the COVID 19 mortality from the beginning to end of 2023. Plenty of health policy and protective measures such as masking, physical distancing, air purification and the distribution of the vaccines in early 2021 may have an impact on this. </p>
-<p> But qhat about if we limit to just the 2020 year? </p>
+<p> But what about if we limit to just the 2020 year? </p>
 
 <br> </br>
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/2020_US_State_Mortality_Rates_by_Normalized_Average_Trips.png)
