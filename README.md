@@ -69,6 +69,6 @@ Link to full analysis: https://ahomagai.github.io/Ont_Prov_Election_Insight.html
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/Voting%20Changes%20across%20Ontario's%20Election%20Districts.PNG)
 <br></br>
 
-<p> Point colors represent districts won by each party according to their respective colors. Values below 0 indicate reduction in votes 2022 compared to 2018 as a percentage of total votes cast in that riding. Lower is worse, higher is better.  <br> 
+<p> Point colors represent districts won by each party according to their respective colors. Values below 0 indicate reduction in votes 2022 compared to 2018 as a percentage of total votes cast in that riding. Lower is worse, higher is better. Green vertical bars represent ridings that switched winners from 2018 to 2022. <br> 
 
   Overall, the NPD once again lost votes across a wide range of ridings with only a few being above 0 (gaining votes). Even in the ridings they'd won in 2022, their vote percentage compared to 2018 was lower. What the NDP lost, the LIB and PCP gain. However, with the performance of the LIB party in 2018, their 2022 results seem more like a regression to the mean rather than a substantial comeback. Finally, the PCP ride strong with most of their voting % teetring just above the 0% mark, showing an even stronger performance in 2022 compared to 2018.  </p>
