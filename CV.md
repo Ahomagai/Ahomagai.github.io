@@ -13,6 +13,7 @@ hypothesis testing, data analysis, and visualization
 - Clinical researcher specializing in neurodegenerative diseases and better understanding motor symptoms of Parkinson's Disease (PD) through biophysical sensors
 
 - Trained in measurement of clinical neurophysiological signals from EEG and EMG; interested in applying these skills to BCI
+
 ---
 
 ## Work Experience
