@@ -4,4 +4,4 @@ Quick summary of my work can be found : [here](https://github.com/Ahomagai/Ahoma
 
 You can also visit my github profile : [here](https://github.com/Ahomagai)
       
-My CV: 
+My CV: [here](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/CV.md)
