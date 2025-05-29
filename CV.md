@@ -119,7 +119,7 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
 
 ## Teaching Experience
 
-  - Graduate Teaching Assistant – 1st Year Human Anatomy Lab (cadaver lab)  
+  - Graduate Teaching Assistant (2021 & 2023) – 1st Year Human Anatomy Lab (cadaver lab)  
 
   - Guest Lecture – Cognition, Cognitive Dysfunction, and Movement (KIN359)  
 
