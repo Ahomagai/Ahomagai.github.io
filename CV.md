@@ -50,24 +50,24 @@ matters pertaining to graduate student experience (funding, academic policies et
 
 ## Projects
 
-- **Deadliness in mass shootings: What factors determine deadliness of a mass shooting incident in  
-the United States? (R)**  
+- [**Deadliness in mass shootings: What factors determine deadliness of a mass shooting incident in  
+the United States? (R)**](https://ahomagai.github.io/mass_shooting.html)    
 
   - Used data from the Violence Project to determine whether factors such as gun law strictness, gun  
   ownership, political party affiliation, link to hate groups etc. affected the deadliness of a mass  
   shooting incident  
 
-- **Emergency room readmission: Prediction of high-frequency users of emergency departments using  
-MIMICIII dataset & various machine learning models (PostgreSQL & Python)**  
+- [**Emergency room readmission: Prediction of high-frequency users of emergency departments using  
+MIMICIII dataset & various machine learning models (PostgreSQL & Python)**](https://github.com/Ahomagai/HighFrequencyEmergencyDepartmentML)  
 
   - Compared and optimized various ML models (XGBoost, Ensemble, SVM etc.) to identify the best  performing model that predicted high frequency users of emergency departments  
 
-- **Three parties of Ontario: Insights into 2018 and 2022 provincial elections (Tableau & Python)**  
+- [**Three parties of Ontario: Insights into 2018 and 2022 provincial elections (Tableau & Python)**](https://ahomagai.github.io/Ont_Prov_Election_Insight.html)  
 
   - Compared Ontario provincial election results and highlighted insights from the 2018 and 2022  
   results across the three major parties, creating interactive geospatial maps of riding outcomes  
 
-- **Wrangling Chess: Analyzing first move advantage and most common first move in chess (R)**  
+- [**Wrangling Chess: Analyzing first move advantage and most common first move in chess (R)**](https://ahomagai.github.io/Chess_data.html)  
 
   - Used R and Lichess.com to extract and wrangle unstructured text into usable tabular data and  
   performed linear regressions to calculate first move ELO advantage and most common move  
@@ -93,7 +93,7 @@ MSc Thesis: How do emotions affect gait?
 
 ### Publications
 
-*Emotions affect steady-state walking performance*, PLOS ONE, Accepted September 14, 2023  
+[*Emotions affect steady-state walking performance*, PLOS ONE, Accepted September 14, 2023](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0284308)  
 
 ### Presentations
 
