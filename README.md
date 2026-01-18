@@ -3,11 +3,11 @@
 The repository for my personal website that showcases (some) of my projects that I've done so far. 
 
 
-### Highlights of my work:
+# Highlights of my work:
 
 ## COVID 19 and Mortality (R & Forecasting time-series data )
 
-### Did states that had more people travel during the pandemic also coincide with more deaths? 
+### Did travel frequency in different US states also coincide with more deaths? 
 <br> </br>
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/US%20State%20Mortality%20Rates%20across%20Normalized%20Avg%20Number%20of%20Trips.png)
 
@@ -18,7 +18,7 @@ The repository for my personal website that showcases (some) of my projects that
 <br> </br>
 ![Alt text](https://github.com/Ahomagai/Ahomagai.github.io/blob/main/images/2020_US_State_Mortality_Rates_by_Normalized_Average_Trips.png)
 
-<p> Now a more interesting story emerges, although the relationship is weak, r=0.34, p<0.05, there is some significant correlation between mortality rates and number of trips taken in 2020. Red dots represents states where mortality rate was >400 deaths per 100,000 and green dots represent mortality rates <200 per 100,000. Population density could for sure have played a role in these results but it is interesting that it isn't just more population / higher density -> higher deaths, as was the case with North Dakota being high in deaths with less than 1,000,000 in population. </p>
+<p> Now a more interesting story emerges, although the relationship is weak, r=0.34, p<0.05, there is some weak (but significant) correlation between mortality rates and number of trips taken in 2020. Red dots represents states where mortality rate was >400 deaths per 100,000 and green dots represent mortality rates <200 per 100,000. Population density could for sure have played a role in these results but it is interesting that it isn't just more population OR higher density resulting in higher deaths, as was the case with North Dakota being high in deaths with less than 1,000,000 in population. </p>
 
 <br> </br>
 ### Forecasting Covid 19 cases using autoregressive models 
@@ -47,7 +47,7 @@ The repository for my personal website that showcases (some) of my projects that
 <br></br> 
 Link to full analysis: https://ahomagai.github.io/Ont_Prov_Election_Insight.html
 
-<p>I think these two following graphs is really all you need to look at to get a sense of how different parties performed in the 2022 Provincial Election compared to the 2018 Election. (2025 election data is in development, don't you worry). P.S. on the full analysis website both of these graphs are interactable. </p>
+<p>I think these two following graphs is really all you need to look at to get a sense of how different parties performed in the 2022 Provincial Election compared to the 2018 Election. (2025 election data is in development, don't you worry). </p>
 
 ### Who took from who? 
 
