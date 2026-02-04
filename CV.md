@@ -28,9 +28,9 @@ of their homes
 combination of accelerometers and biophysical sensors
 
 **Vice President** | *UW Graduate Student Association (GSA) | Waterloo, ON May 2025 – Current*
-• Leading the administration arm of the GSA, managing student events, elections, supporting staff,
+- Leading the administration arm of the GSA, managing student events, elections, supporting staff,
 acting as one of the main points of contact between UW administration and the student body
-• Advising leadership committees through evidence-informed analysis on matters pertaining to the
+- Advising leadership committees through evidence-informed analysis on matters pertaining to the
 improvement of student experience (funding, academic policies etc.
 
 **Graduate Peer Tutor** | *UW Writing and Communication Center | Waterloo, ON*  
