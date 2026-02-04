@@ -2,7 +2,7 @@
 # Abh Homagain 
 ### 4th Year PhD Candidate | Data Science | Neurodegenerative Diseases | Using data to understand the compelling stories behind them 
 
-#### Hi, I'm Abh, this is just a quick website that showcases some (not all!) of my work 
+#### This is just a quick website that showcases some (not all!) of my work 
 Feel free to check out the links for more details on my work 
 
 ### [Using machine learning to classify frequent users of hospital emergency department (SQL & Python)](https://github.com/Ahomagai/HighFrequencyEmergencyDepartmentML/tree/main)
@@ -29,6 +29,8 @@ This project also asks whether COVID 19 mortalities were higher in states where 
 This project is about understanding how we can create structured data from an unstructured dataset (like chess notation data), and perform out own analysis on it. Often times, the most time consuming and critical parts of data analys is simply being able to create a nice rectangular dataset. Understanding how to do this well, and how to do it right is critical in any future statistical analysis. We also take a quick look at _how_ advantageous the first move is in chess and how popular the e4 pawn move is across all the different ELOs. 
 
 
-You can also visit my github profile : [here](https://github.com/Ahomagai)
-My CV: [here](https://ahomagai.github.io/CV)
+============================================================================================
+You can also visit my github profile : [here](https://github.com/Ahomagai) 
+And My CV: [here](https://ahomagai.github.io/CV)
+
 
