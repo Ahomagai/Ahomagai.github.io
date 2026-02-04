@@ -132,9 +132,9 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
 
   - Guest Lecturer - Graduate, Research Design and Statistical Analysis - Introduction to Machine Learning (2026)
 
-  - Graduate Teaching Assistant – Undergraduate, Human Anatomy (2021, 2023)
-
   - Guest Lecturer – Undergraduate, Cognition, Cognitive Dysfunction, and Movement (2024)
+
+  - Graduate Teaching Assistant – Undergraduate, Human Anatomy (2021, 2023)
 ---
 
 ## Extra-Curriculars
