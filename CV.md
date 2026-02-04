@@ -5,14 +5,13 @@
 
 ## Skills and Qualifications
 
-- Data driven mixed-methods researcher with an ability to lead complex research studies  
+- 4+ years of experience with Python (NumPy, Pandas, Matplotlib, scikit-learn), R, and Tableau for hypothesis testing, data analysis, and visualization
 
-- 4+ years of experience with Python (NumPy, Pandas, Matplotlib, scikit-learn), R, and Tableau for  
-hypothesis testing, data analysis, and visualization  
+- Experienced in  applying data science theories, principles and best practices and advanced analytics for data modelling, data mining, statistical modelling and evidence-informed decision-making including implementing end-to-end machine learning models and analysis 
 
-- Clinical researcher specializing in neurodegenerative diseases and better understanding motor symptoms of Parkinson's Disease (PD) through biophysical sensors
+- 3+ years of experience conducting and synthesizing clinical research using qualitative and quantitative methods, including systematic literature reviews, evidence synthesis, and critical appraisal, with a strong focus on study design, and clinically meaningful interpretation of findings
 
-- Trained in measurement of clinical neurophysiological signals from EEG and EMG; interested in applying these skills to BCI
+- PhD candidate with advanced analytical and biostatistics expertise in Python, R, SQL with an ability to lead complex analytical projects with a multi-disciplinary team
 
 ---
 
@@ -58,9 +57,9 @@ the United States? (R)**](https://ahomagai.github.io/mass_shooting.html)
   shooting incident  
 
 - [**Emergency room readmission: Prediction of high-frequency users of emergency departments using  
-MIMICIII dataset & various machine learning models (PostgreSQL & Python)**](https://github.com/Ahomagai/HighFrequencyEmergencyDepartmentML)  
+MIMICIII dataset & various machine learning models (SQL & Python)**](https://github.com/Ahomagai/HighFrequencyEmergencyDepartmentML)  
 
-  - Compared and optimized various ML models (XGBoost, Ensemble, SVM etc.) to identify the best  performing model that predicted high frequency users of emergency departments  
+  - Compared and optimized various ML models (XGBoost, Ensemble, SVM etc.) to identify the best performing model that predicted high frequency users of emergency departments  
 
 - [**Three parties of Ontario: Insights into 2018 and 2022 provincial elections (Tableau & Python)**](https://ahomagai.github.io/Ont_Prov_Election_Insight.html)  
 
@@ -99,6 +98,10 @@ MSc Thesis: How do emotions affect gait?
 
 • **Conference Poster Presentations**  
 
+  - Title: Characterizing how different subtypes of freezers performed on the new clinician reported
+outcome for freezing of gait, International Society for Posture and Gait Research (ISPGR),
+Maastricht, Netherlands, July 2025
+
   - Title: *Postural instability relates to autonomic dysfunction in Parkinson’s Disease*, International  
 Congress of Parkinson’s Disease and Movement Disorders, Philadelphia, USA, September 2024  
 
@@ -119,18 +122,25 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
 ---
 
 ## Teaching Experience
+  - Graduate Teaching Assistant – Graduate, Research Design and Statistical Analysis (2026)
 
-  - Graduate Teaching Assistant (2021 & 2023) – 1st Year Human Anatomy Lab (cadaver lab)  
+  - Guest Lecturer - Graduate, Research Design and Statistical Analysis - Introduction to Machine Learning (2026)
 
-  - Guest Lecture – Cognition, Cognitive Dysfunction, and Movement (KIN359)  
+  - Graduate Teaching Assistant – Undergraduate, Human Anatomy (2021, 2023)
 
+  - Guest Lecturer – Undergraduate, Cognition, Cognitive Dysfunction, and Movement (2024)
 ---
 
 ## Extra-Curriculars
 
-**Hacker** | *Hack the North* | *September 2023*  
-  - Created a working prototype of a single camera-based gait analysis tool, using OpenCV in Python  
+**Core Member** | *WATOLINK | University of Waterloo* | *June 2025 – Current*  
+  - Developed machine learning models to control external hand prosthesis using electromyography (EMG) 
 
 **Member** | *Senate Graduate Research Committee | University of Waterloo* | *May 2024 – Current*  
   - Represented the Faculty of Health as a voting member of the SGRC, providing input and  
 recommendations to senate regarding changes in academic programs, finance, graduate courses etc.  
+
+**Hacker** | *Hack the North* | *September 2023*  
+  - Created a working prototype of a single camera-based gait analysis tool, using OpenCV in Python  
+
+
