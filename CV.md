@@ -24,23 +24,29 @@
 processing to qualitatively assess how Parkinson’s Disease affects patients’ views and experiences  
 of their homes  
 
-  - Currently developing RNN based machine learning models to detect freezing of gait using a  
-combination of accelerometers and biophysical sensors  
+  - Currently developing recurrent neural network machine learning model to detect motor and gait abnormalities using a  
+combination of accelerometers and biophysical sensors
+
+**Vice President** | *UW Graduate Student Association (GSA) | Waterloo, ON May 2025 – Current*
+• Leading the administration arm of the GSA, managing student events, elections, supporting staff,
+acting as one of the main points of contact between UW administration and the student body
+• Advising leadership committees through evidence-informed analysis on matters pertaining to the
+improvement of student experience (funding, academic policies etc.
 
 **Graduate Peer Tutor** | *UW Writing and Communication Center | Waterloo, ON*  
-*Jan 2023 – Current*  
+*Jan 2023 – December 2025*  
 
   - Advised graduate students in their writing and communication projects, from brainstorming to  
 proofreading of thesis work, course assignments, and manuscripts  
 
   - Guided undergraduate students with their course assignments, asking probing questions and  
-providing feedback to improve their work  
+providing feedback to improve their work
 
 **Council Speaker** | *UW Graduate Student Association | Waterloo, ON*  
-*May 2024 – Current*  
+*May 2024 – April 2025*  
 
-  - Chair of the graduate student council, responsible for advising and collaborating with the Board and  
-President of the GSA on matters of concern, advocacy, and direction of the GSA  
+  - Chaired the graduate student council, was responsible for advising and collaborating with the Board and  
+President of the GSA on matters of concern, advocacy, and direction of the GSA    
 
   - Advised and facilitated discussion within leadership committees of the University of Waterloo on  
 matters pertaining to graduate student experience (funding, academic policies etc.)  
