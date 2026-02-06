@@ -16,10 +16,10 @@ Using the deface package, this program anonymizes videos used in research contex
 
 ## Data Science Projects
 ### [Using machine learning to classify frequent users of hospital emergency department (SQL & Python)](https://github.com/Ahomagai/HighFrequencyEmergencyDepartmentML/tree/main)
-The main goal here was to determine which features best predict high frequency users of an emergency department using the MIMIC-III clinical dataset. Understanding high frequent users of the emergency department, and _what makes them frequent users_ is essential in determining how we can better manage wait times in our hospitals. 
+The main goal here was to determine which features best predict high frequency users of an emergency department using the large (>20gb) MIMIC-III clinical dataset. Understanding high frequent users of the emergency department, and _what makes them frequent users_ is essential in determining how we can better manage wait times in our hospitals. 
 
 
-### [Regression, Dimension Reduction & US Mass Shooting Victims (R)](https://ahomagai.github.io/mass_shooting.html)
+### [Exploratory Data Analysis & US Mass Shooting Victims (R)](https://ahomagai.github.io/mass_shooting.html)
 The goal of this project was to look at the factors behind the 'deadliness' of a mass shooting event across the United States. We ask the questions:
 - What factors make a mass shooting incident more or less deadly than another?
 - Is there a difference in this deadliness between 'red' and 'blue' states
@@ -44,5 +44,6 @@ You can also visit my github profile : [here](https://github.com/Ahomagai)
 And My CV: [here](https://ahomagai.github.io/CV)
 
 ---
+
 
 
