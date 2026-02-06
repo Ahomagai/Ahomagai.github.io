@@ -7,11 +7,11 @@
 
 - 4+ years of experience with Python (NumPy, Pandas, Matplotlib, scikit-learn), R, and Tableau for hypothesis testing, data analysis, and visualization
 
-- Experienced in  applying data science theories, principles and best practices and advanced analytics for data modelling, data mining, statistical modelling and evidence-informed decision-making including implementing end-to-end machine learning models and analysis 
+- Knowledge and expertise in applying data science theories, principles, best practices and advanced analytics for data modelling, data mining, statistical modelling and evidence-informed decision-making including development of end-to-end machine learning pipelines 
 
-- 3+ years of experience conducting and synthesizing clinical research using qualitative and quantitative methods, including systematic literature reviews, evidence synthesis, and critical appraisal, with a strong focus on study design, and clinically meaningful interpretation of findings
+- 3+ years of experience conducting and synthesizing clinical research using qualitative and quantitative methods with a strong focus on study design and clinically meaningful interpretation of findings
 
-- PhD candidate with advanced analytical and biostatistics expertise in Python, R, SQL with an ability to lead complex analytical projects with a multi-disciplinary team
+- Student leader experienced in communicating findings, insights, and recommendations to non-technical stakeholders, making complex concepts accessible to diverse audiences
 
 ---
 
@@ -19,19 +19,18 @@
 
 **Doctoral Candidate** | *University of Waterloo | Waterloo, ON*  
 *Sep 2022 – Current*  
-
-  - Developing a mixed-methods approach using semi-structured interviews and natural language  
-processing to qualitatively assess how Parkinson’s Disease affects patients’ views and experiences  
-of their homes  
-
-  - Currently developing recurrent neural network machine learning model to detect motor and gait abnormalities using a  
-combination of accelerometers and biophysical sensors
+  - Conducting mixed-methods clinical research to synthesize qualitative and quantitative evidence on
+how Parkinson’s Disease impacts patient quality of life, supporting the evaluation of patient-centered
+outcomes and clinical tools
+  - Evaluating the internal and external validity, reliability, and clinical utility of assessment tools used to
+measure motor symptom severity in Parkinson’s disease across treatment states
+  - Developing and evaluating machine learning models using multimodal sensor data to support early
+detection of clinically meaningful motor symptoms, with emphasis on model interpretabilit
 
 **Vice President** | *UW Graduate Student Association (GSA) | Waterloo, ON May 2025 – Current*
-- Leading the administration arm of the GSA, managing student events, elections, supporting staff,
-acting as one of the main points of contact between UW administration and the student body
-- Advising leadership committees through evidence-informed analysis on matters pertaining to the
-improvement of student experience (funding, academic policies etc.
+- Leading the administration arm of the GSA, managing student events and elections
+- Advising, consluting, and negotiating with UWaterloo leadership committees through evidence-informed analysis on matters pertaining to the
+improvement of student experience such as minimum funding, academic policies etc.
 
 **Graduate Peer Tutor** | *UW Writing and Communication Center | Waterloo, ON*  
 *Jan 2023 – December 2025*  
@@ -140,7 +139,7 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
 ## Extra-Curriculars
 
 **Core Member** | *WATOLINK | University of Waterloo* | *June 2025 – Current*  
-  - Developed machine learning models to control external hand prosthesis using electromyography (EMG) 
+  - Developing machine learning models to control external hand prosthesis using electromyography (EMG) 
 
 **Member** | *Senate Graduate Research Committee | University of Waterloo* | *May 2024 – Current*  
   - Represented the Faculty of Health as a voting member of the SGRC, providing input and  
