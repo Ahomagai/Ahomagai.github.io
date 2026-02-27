@@ -27,8 +27,7 @@ The goal of this project was to look at the factors behind the 'deadliness' of a
 - Is there a difference in this deadliness between 'red' and 'blue' states
 - Does gun ownership rates and strictness of gun laws impact deadliness of mass shootings?
 
-Understanding how different personal factors and state level policies are associated with gun violence can help us improve future policies, and implement better strategies to combat gun violence in the US. (Note, I am Canadian but this was too cool of a project to not look at). 
-
+Understanding how different personal factors and state level policies are associated with gun violence can help us improve future policies, and implement better strategies to combat gun violence in the US. 
 ### [Forecasting COVID-19 Cases using Auto-regressive Models (R)](https://ahomagai.github.io/NYT-Covid.html)
 I decided to use an autoregressive integrated moving average (ARIMA) in two different styles, manual and automatic arima, to forecast COVID-19 cases in the US. In this instance, I used the NYT Covid Dataset from Kaggle and looked at the daily COVID cases across all of the United States from the beginning of the pandemic to the end of January 2023.
 
@@ -43,6 +42,7 @@ You can also visit my github profile : [here](https://github.com/Ahomagai)
 And My CV: [here](https://ahomagai.github.io/CV)
 
 ---
+
 
 
 
