@@ -29,7 +29,7 @@ detection of clinically meaningful motor symptoms, with emphasis on model interp
 
 **Vice President** | *UW Graduate Student Association (GSA) | Waterloo, ON May 2025 – Current*
 - Leading the administration arm of the GSA, managing student events and elections
-- Advising, consluting, and negotiating with UWaterloo leadership committees through evidence-informed analysis on matters pertaining to the
+- Advising, consulting, and negotiating with UWaterloo leadership committees through evidence-informed analysis on matters pertaining to the
 improvement of student experience such as minimum funding, academic policies etc.
 
 **Graduate Peer Tutor** | *UW Writing and Communication Center | Waterloo, ON*  
@@ -127,6 +127,7 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
 ---
 
 ## Teaching Experience
+
   - Graduate Teaching Assistant – Graduate, Research Design and Statistical Analysis (2026)
 
   - Guest Lecturer - Graduate, Research Design and Statistical Analysis - Introduction to Machine Learning (2026)
@@ -134,6 +135,7 @@ Posture and Gait Research (ISPGR), Montreal, Canada, July 2022
   - Guest Lecturer – Undergraduate, Cognition, Cognitive Dysfunction, and Movement (2024)
 
   - Graduate Teaching Assistant – Undergraduate, Human Anatomy (2021, 2023)
+
 ---
 
 ## Extra-Curriculars
