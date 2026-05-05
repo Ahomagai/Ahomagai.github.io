@@ -2439,6 +2439,13 @@ summary(Tot.Victims_all_mod2)</code></pre>
                correlated to this new predictor variable (Tot.Victims_all_mod2) and was
                left out of another stepwise regression test.
             </p>
+
+            <p> Lets try some dimension reduction using PCA to see how well our explanatory variables account for variance in the response variable. </</p>
+
+            <p> Here I'll perform a PCA with all the variables selected and see how much of the variance in total.victims we can explain. 
+               This can give us an idea of how well equipped our dataset is in predicting the response variable from the explanatory variables and whether we can take advantage of the transformed dimensions of the PCA to create stronger
+               prediction variables for a linear regression. </p>
+            <b> </b>
             <div style="page-break-after: always;"></div>
             <pre class="r"><code>## PCA 
 col_order &lt;- c(&quot;Total.Victims&quot;, &quot;Age&quot;, &quot;Employed&quot;, &quot;College.Grad&quot;, &quot;Community.Population&quot;,&quot;grade2019&quot;, &quot;gunOwnership&quot;, &quot;Hate.Group.Link&quot;)
@@ -2600,6 +2607,9 @@ summary(Model_PCA_Victim_Dim_2)</code></pre>
                &lt; 2.2e-16) which contains 5 dimensions compared to the 3 dimension
                model which has a fairly lower r squared value of 0.635.
             </p>
+
+            <b> </b>
+            <h2>Results & Discussion </h2>
             <p> We started out with the goal of this project which was to look at the factors behind the 'deadliness' of a
                mass shooting event across the United States. We ask the questions: </p>
                      
