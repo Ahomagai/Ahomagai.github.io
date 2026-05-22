@@ -1,5 +1,5 @@
 # Abhishesh Homagain  
-(647) 505-2111 | abh.homagain@gmail.com | Ahomagai.github.io  
+abh.homagain@gmail.com | Ahomagai.github.io  
 
 ---
 
