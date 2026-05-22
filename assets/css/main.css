@@ -2774,11 +2774,7 @@ input, select, textarea {
 
 			.tiles article h3 {
 				font-size: 1.75em;
-				display: inline-block;
-				background-color: #ffffff;
 				color: #242943;
-				padding: 0.15em 0.4em;
-				
 			}
 
 				.tiles article h3 a:hover {
@@ -2805,7 +2801,7 @@ input, select, textarea {
 				display: block;
 				height: 100%;
 				left: 0;
-				opacity: 0.85;
+				opacity: 0.90;
 				position: absolute;
 				width: 100%;
 				z-index: 2;
@@ -2824,7 +2820,7 @@ input, select, textarea {
 			}
 
 			.tiles article:hover:before {
-				opacity: 0;
+				opacity: 0.8;
 			}
 			
 			.tiles article p {
