@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>canada_healthcare_survey</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Canada_Healthcare_Survey_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Canada_Healthcare_Survey_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Canada_Healthcare_Survey_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Canada_Healthcare_Survey_files/libs/quarto-html/popper.min.js"></script>
+<script src="Canada_Healthcare_Survey_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Canada_Healthcare_Survey_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Canada_Healthcare_Survey_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Canada_Healthcare_Survey_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Canada_Healthcare_Survey_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Canada_Healthcare_Survey_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Canada_Healthcare_Survey_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import libraries </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="load-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="load-dataset">Load Dataset</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in data </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"cdn-attitudes-healthcare_attitudes-canadiens-system-soins.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lots of features in this dataset, need to pare down response variable and explanatory variables - Response variable: Q3 - How would you rate the current state of the Canadian health care system? (1-10, 10 good, 1 bad, 99 - refused to answer)</p>
+<ul>
+<li>Explanatory variables:
+<ul>
+<li>Q1 CODM_1: Thinking of the issues facing Canada today, which one would you say the Government of Canada should focus on most?
+<ul>
+<li>more than 6 responses, check data dictionary for more details</li>
+<li>Rename: Gov_focus</li>
+</ul></li>
+<li>Q2 How would you rate the current state of the Canadian economy?
+<ul>
+<li>1-10 likert scale, 1 - terrible, 10 - excellent, 99 - did not know / refused to answer</li>
+<li>Rename: Current_state_eco</li>
+</ul></li>
+<li>Q4 To what degree do you agree or disagree with the following statement? I am confident that if I or a family member were to become seriously ill, we would be able to access good health care services
+<ul>
+<li>1-4 likert, 1 - Agree, 4 - strongly disagree, 5 - Dont know</li>
+<li>Rename: Access_good_hc</li>
+</ul></li>
+<li>Q5 Over the next five years, do you think the Canadian health care system will significantly improve, improve somewhat, stay the same, worsen somewhat, or significantly worsen?
+<ul>
+<li>1-5 likert, 1 - Significantly improve, 5 - Significantly worsen, 9 - Dont know</li>
+<li>Rename: Can_hc_improve</li>
+</ul></li>
+<li>Q6A_M1 Which of the following do you feel is the most serious challenge facing the Canadian health care system?
+<ul>
+<li>Code this as categorical (lots of possible responses, see data dictionary for more info)</li>
+<li>Rename: Most_challenge_hc</li>
+</ul></li>
+<li>Q7 Which of the following two statements comes closer to your point of view:
+<ul>
+<li>1 (current healthcare spending needs to be managed more effienctly)</li>
+<li>2 (healthcare system needs more funding)</li>
+<li>3 (Both; but this answer has an odd coding)</li>
+<li>4 None</li>
+<li>5 Refused to answer</li>
+<li>Rename: Hc_manage</li>
+</ul></li>
+<li>AGE</li>
+<li>age in years<br>
+</li>
+<li>Q12 Demographics Education
+<ul>
+<li>1 None</li>
+<li>2 High School diploma or equivalent</li>
+<li>3 Registered Apprenticeship or other trades certificate or diploma</li>
+<li>4 College, CEGEP or other non-university certificate or diploma</li>
+<li>5 University degree, certificate or diploma</li>
+<li>9 Refused</li>
+<li>Rename: Education</li>
+</ul></li>
+<li>Q13 Demographics total household income
+<ul>
+<li>1 Under $20,000</li>
+<li>2 $ 20,000 to just under $ 40,000</li>
+<li>3 $ 40,000 to just under $ 60,000</li>
+<li>4 $ 60,000 to just under $ 80,000</li>
+<li>5 $ 80,000 to just under $ 100,000</li>
+<li>6 $ 100,000 to just under $ 150,000</li>
+<li>7 $ 150,000 and above</li>
+<li>8 Refused</li>
+<li>Rename: Household_income</li>
+</ul></li>
+<li>Q14 Employment Status
+<ul>
+<li>1 Working full-time, that is, 35 or more hours per week</li>
+<li>2 Working part-time, that is, less than 35 hours per week</li>
+<li>3 Self-employed</li>
+<li>4 Unemployed, but looking for work</li>
+<li>5 A student attending school full-time</li>
+<li>6 Retired</li>
+<li>7 Not in the workforce [FULL-TIME HOMEMAKER, UNEMPLOYED, NOT WORKING FOR WORK]</li>
+<li>8 [IF VOLUNTEERED: Other – DO NOT SPECIFY]</li>
+<li>9 Refused</li>
+<li>Rename: Employment_status</li>
+</ul></li>
+<li>Q15 Do you currently have a family doctor?
+<ul>
+<li>1 Yes</li>
+<li>2 No</li>
+<li>3 DK/RF</li>
+<li>Rename: Have_fam_doc</li>
+</ul></li>
+<li>Q16 Gender
+<ul>
+<li>1 Male</li>
+<li>2 Female</li>
+<li>Rename: Gender</li>
+</ul></li>
+<li>SREGCODE
+<ul>
+<li>Province</li>
+<li>Rename: Province</li>
+</ul></li>
+<li>REGGRP
+<ul>
+<li>Area (generalized, praries, QN, BC etc.)</li>
+<li>Rename: Area</li>
+</ul></li>
+<li>WTS
+<ul>
+<li>Sampling weight</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="subset-df-to-select-desired-variables" class="level5">
+<h5 class="anchored" data-anchor-id="subset-df-to-select-desired-variables">Subset df to select desired variables</h5>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>explanatory_variables <span class="op">=</span> [<span class="st">'Q1_CODM1'</span>, <span class="st">'Q2'</span>, <span class="st">'Q4'</span>, <span class="st">'Q5'</span>, <span class="st">'Q6A_M1'</span>, <span class="st">'Q7'</span>, <span class="st">'AGE'</span>, <span class="st">'Q12'</span>,<span class="st">'Q13'</span>,<span class="st">'Q14'</span>,<span class="st">'Q15'</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q16'</span>, <span class="st">'SREGCODE'</span>, <span class="st">'REGGRP'</span>, <span class="st">'Q3'</span>, <span class="st">'WTS'</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>column_names <span class="op">=</span> [<span class="st">'Gov_focus'</span>,<span class="st">'Current_state_eco'</span>,<span class="st">'Access_good_hc'</span>,<span class="st">'Can_hc_improve'</span>,<span class="st">'Most_challenge_hc'</span>,<span class="st">'Hc_manage'</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'Education'</span>, <span class="st">'Household_income'</span>, <span class="st">'Employment_status'</span>, <span class="st">'Have_fam_doc'</span>,<span class="st">'Gender'</span>,<span class="st">'Province'</span>, <span class="st">'Area'</span>, <span class="st">'Weight'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset using intersection and list of explanatory variables </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_cols <span class="op">=</span> df.columns.intersection(explanatory_variables)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_subset <span class="op">=</span> df[df_cols]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_subset <span class="op">=</span> df_subset.rename(columns<span class="op">=</span>{<span class="st">'Q1_CODM1'</span>: <span class="st">'Gov_focus'</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q2'</span>: <span class="st">'Current_state_eco'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q4'</span>: <span class="st">'Access_good_hc'</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q5'</span>: <span class="st">'Can_hc_improve'</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q6A_M1'</span>: <span class="st">'Most_challenge_hc'</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q7'</span>: <span class="st">'Hc_manage'</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q12'</span>: <span class="st">'Education'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q13'</span>: <span class="st">'Household_income'</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q14'</span>: <span class="st">'Employment_status'</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q15'</span>: <span class="st">'Have_fam_doc'</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q16'</span>: <span class="st">'Gender'</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'SREGCODE'</span>: <span class="st">'Province'</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'REGGRP'</span>: <span class="st">'Area'</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'WTS'</span>: <span class="st">'Weight'</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'Q3'</span>: <span class="st">'Label'</span>}, inplace<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_subset.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+Gov_focus
+</th>
+<th>
+Current_state_eco
+</th>
+<th>
+Label
+</th>
+<th>
+Access_good_hc
+</th>
+<th>
+Can_hc_improve
+</th>
+<th>
+Most_challenge_hc
+</th>
+<th>
+Hc_manage
+</th>
+<th>
+Education
+</th>
+<th>
+Household_income
+</th>
+<th>
+Employment_status
+</th>
+<th>
+Have_fam_doc
+</th>
+<th>
+Gender
+</th>
+<th>
+Province
+</th>
+<th>
+Weight
+</th>
+<th>
+AGE
+</th>
+<th>
+Area
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+Economy
+</td>
+<td>
+8
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$100,000 to just under $150,000
+</td>
+<td>
+Retired
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Manitoba
+</td>
+<td>
+0.4657
+</td>
+<td>
+66
+</td>
+<td>
+Prairies
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+Education
+</td>
+<td>
+5
+</td>
+<td>
+8
+</td>
+<td>
+Somewhat agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+The rising cost of providing health care services
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+NaN
+</td>
+<td>
+$40,000 to just under $ 60,000
+</td>
+<td>
+Working part-time, that is, less than 35 hours…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+Alberta
+</td>
+<td>
+1.3168
+</td>
+<td>
+30
+</td>
+<td>
+Prairies
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+Education
+</td>
+<td>
+7
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+#NULL!
+</td>
+<td>
+The health care system needs increased funding.
+</td>
+<td>
+College, CEGEP [SAY-JEP] or other non-universi…
+</td>
+<td>
+$80,000 to just under $100,000
+</td>
+<td>
+Self-employed
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Nova Scotia
+</td>
+<td>
+0.8577
+</td>
+<td>
+37
+</td>
+<td>
+ATL
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+Economy
+</td>
+<td>
+7
+</td>
+<td>
+6
+</td>
+<td>
+Somewhat agree
+</td>
+<td>
+Worsen somewhat
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$80,000 to just under $100,000
+</td>
+<td>
+Working full-time, that is, 35 or more hours p…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+British Columbia
+</td>
+<td>
+1.2259
+</td>
+<td>
+50
+</td>
+<td>
+BC
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+Jobs/Unemployment
+</td>
+<td>
+9
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Improve somewhat
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+College, CEGEP [SAY-JEP] or other non-universi…
+</td>
+<td>
+$20,000 to just under $ 40,000
+</td>
+<td>
+Retired
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Nova Scotia
+</td>
+<td>
+0.3870
+</td>
+<td>
+80
+</td>
+<td>
+ATL
+</td>
+</tr>
+<tr>
+<th>
+…
+</th>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+</tr>
+<tr>
+<th>
+2498
+</th>
+<td>
+Environment
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+<td>
+Strongly disagree
+</td>
+<td>
+Worsen somewhat
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$60,000 to just under $ 80,000
+</td>
+<td>
+Working part-time, that is, less than 35 hours…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+Ontario
+</td>
+<td>
+0.9094
+</td>
+<td>
+56
+</td>
+<td>
+ON
+</td>
+</tr>
+<tr>
+<th>
+2499
+</th>
+<td>
+Education
+</td>
+<td>
+6
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+#NULL!
+</td>
+<td>
+The health care system needs increased funding.
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$150,000 and above
+</td>
+<td>
+Not in the workforce [FULL-TIME HOMEMAKER, UNE…
+</td>
+<td>
+No
+</td>
+<td>
+Female
+</td>
+<td>
+Ontario
+</td>
+<td>
+1.7661
+</td>
+<td>
+43
+</td>
+<td>
+ON
+</td>
+</tr>
+<tr>
+<th>
+2500
+</th>
+<td>
+Social problems/Social programs/Social services
+</td>
+<td>
+5
+</td>
+<td>
+9
+</td>
+<td>
+Somewhat disagree
+</td>
+<td>
+Worsen somewhat
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$150,000 and above
+</td>
+<td>
+Working full-time, that is, 35 or more hours p…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+Ontario
+</td>
+<td>
+1.7661
+</td>
+<td>
+43
+</td>
+<td>
+ON
+</td>
+</tr>
+<tr>
+<th>
+2501
+</th>
+<td>
+Dk/Ref
+</td>
+<td>
+5
+</td>
+<td>
+6
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+College, CEGEP [SAY-JEP] or other non-universi…
+</td>
+<td>
+$80,000 to just under $100,000
+</td>
+<td>
+Working full-time, that is, 35 or more hours p…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+Ontario
+</td>
+<td>
+1.7661
+</td>
+<td>
+45
+</td>
+<td>
+ON
+</td>
+</tr>
+<tr>
+<th>
+2502
+</th>
+<td>
+Health care system
+</td>
+<td>
+6
+</td>
+<td>
+8
+</td>
+<td>
+Somewhat agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+#NULL!
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+High School diploma or equivalent
+</td>
+<td>
+$20,000 to just under $ 40,000
+</td>
+<td>
+Retired
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Ontario
+</td>
+<td>
+0.7903
+</td>
+<td>
+72
+</td>
+<td>
+ON
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+2503 rows × 16 columns
+</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean dataset</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove entries with 99 for Gov_focus, and Current_state_eco </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove entries with 5 and 9 for Access_good_hc and Can_hc_improve </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 9 from Most_challenge_hc </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 5 from Hc_manage</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove most missing data from Eduction and 9 </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 8 from HC income </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 9 from Employment_status </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 3 from Have_fam_doc </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># does it make sense to remove all these values? They're still meaningful even if they refused to answer</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># they represent a valid response</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the count of each answer for each column </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="onto-data-cleaning-wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="onto-data-cleaning-wrangling">Onto: Data Cleaning, Wrangling</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show cumulative number of each unique response per variable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cols <span class="kw">in</span> df_subset.columns:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Value counts for </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df_subset[cols].value_counts(dropna<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Value counts for Gov_focus:
+Gov_focus
+Economy                                               552
+Health care system                                    463
+Jobs/Unemployment                                     265
+Dk/Ref                                                234
+Environment                                           131
+Cost of living/High taxes                              99
+Education                                              91
+Debt reduction/Debt/Deficit                            88
+Poverty                                                83
+Other                                                  48
+Helping elderly people/Seniors                         47
+Laws/Justice system                                    45
+Immigration                                            44
+Canada/Canadian citizens                               41
+Social problems/Social programs/Social services        36
+Federal/Provincial relations/Place of QC in Canada     32
+Government spending                                    30
+Foreign issues                                         25
+Crime                                                  22
+Affordable housing                                     16
+Aboriginal issues                                      16
+Pension issues                                         16
+Oil issues                                             14
+Infrastructure/Roads                                   13
+Child care                                             12
+Family Virtues                                         10
+National security/Military/Troops                       9
+Gun Controls/Registration                               9
+Welfare                                                 7
+Agriculture                                             5
+Name: count, dtype: int64
+
+
+Value counts for Current_state_eco:
+Current_state_eco
+7                    700
+6                    568
+5                    483
+8                    296
+4                    180
+3                     89
+Don't know/Refuse     51
+1 - Terrible          48
+9                     38
+2                     29
+10 - Excellent        21
+Name: count, dtype: int64
+
+
+Value counts for Label:
+Label
+7                    549
+5                    474
+6                    419
+8                    358
+4                    217
+3                    125
+1 - Terrible         106
+9                     91
+2                     73
+10 - Excellent        63
+Don't know/Refuse     28
+Name: count, dtype: int64
+
+
+Value counts for Access_good_hc:
+Access_good_hc
+Somewhat agree       1284
+Strongly agree        655
+Somewhat disagree     366
+Strongly disagree     175
+Don't know/Refuse      23
+Name: count, dtype: int64
+
+
+Value counts for Can_hc_improve:
+Can_hc_improve
+Stay the same            869
+Worsen somewhat          663
+Improve somewhat         585
+Significantly worsen     197
+Significantly improve    104
+Don't know/Refuse         85
+Name: count, dtype: int64
+
+
+Value counts for Most_challenge_hc:
+Most_challenge_hc
+#NULL!                                                          1251
+Shortage of medical professionals such as doctors, nurses an     466
+The aging of the Canadian population                             357
+The rising cost of providing health care services                220
+An increase in chronic diseases among Canadians, such as dia     114
+All of them                                                       32
+(DO NOT READ - VOLUNTEERED) Don't know/Refuse                     31
+Corruption/Mis-mangement of funds                                  7
+Long Wait times/Delays                                             5
+Lack of funding                                                    5
+Government bureaucracy                                             3
+Need of Better Health Education                                    3
+None of them                                                       3
+Abusive use of the Health Care system                              3
+Lack of hospoital resources (beds, equipment, etc)                 1
+Accessibility to Health Care                                       1
+Cancer                                                             1
+Name: count, dtype: int64
+
+
+Value counts for Hc_manage:
+Hc_manage
+Current healthcare spending needs to be managed more effecti    1460
+The health care system needs increased funding.                  819
+(DO NOT READ - VOLUNTEERED) Both                                 182
+(DO NOT READ - VOLUNTEERED) Don't know/Refuse                     34
+(DO NOT READ - VOLUNTEERED) None                                   8
+Name: count, dtype: int64
+
+
+Value counts for Education:
+Education
+University degree, certificate or diploma                       753
+College, CEGEP [SAY-JEP] or other non-university certificate    642
+High School diploma or equivalent                               637
+Registered Apprenticeship or other trades certificate or dip    229
+NaN                                                             223
+[DO NOT READ] Refused                                            19
+Name: count, dtype: int64
+
+
+Value counts for Household_income:
+Household_income
+$20,000 to just under $ 40,000     487
+$40,000 to just under $ 60,000     422
+$60,000 to just under $ 80,000     340
+$100,000 to just under $150,000    305
+$80,000 to just under $100,000     267
+[DO NOT READ] Refused              252
+Under $20,000                      234
+$150,000 and above                 196
+Name: count, dtype: int64
+
+
+Value counts for Employment_status:
+Employment_status
+Working full-time, that is, 35 or more hours per week           900
+Retired                                                         811
+Self-employed                                                   244
+Working part-time, that is, less than 35 hours per week         206
+Not in the workforce [FULL-TIME HOMEMAKER, UNEMPLOYED, NOT L    151
+Unemployed, but looking for work                                117
+A student attending school full-time                             45
+[DO NOT READ] [IF VOLUNTEERED: Other -- DO NOT SPECIFY]          19
+[DO NOT READ] Refused                                            10
+Name: count, dtype: int64
+
+
+Value counts for Have_fam_doc:
+Have_fam_doc
+Yes                   2178
+No                     314
+Don't know/Refused      11
+Name: count, dtype: int64
+
+
+Value counts for Gender:
+Gender
+Female    1252
+Male      1251
+Name: count, dtype: int64
+
+
+Value counts for Province:
+Province
+Ontario                   691
+Quebec                    522
+British Columbia          316
+Alberta                   301
+Manitoba                  143
+Saskatchewon              140
+Nova Scotia               115
+New Brunswick              91
+Newfoundland               64
+Northwestern Territory     41
+Yukon Territory            31
+Nunavut                    31
+Prince Edward Island       17
+Name: count, dtype: int64
+
+
+Value counts for Weight:
+Weight
+0.7903    207
+1.7661    163
+0.9094    148
+0.4657    142
+0.7884    137
+0.4047    136
+0.9128    135
+1.3469    131
+0.7575    126
+0.5811    103
+1.3168     97
+1.0004     86
+0.3870     86
+0.5864     86
+2.1811     74
+3.5985     73
+0.6005     65
+0.4663     64
+1.5095     64
+0.8577     62
+1.2249     48
+0.4522     40
+2.6318     33
+1.5967     29
+0.0883     28
+0.0331     27
+1.2259     26
+0.1570     17
+0.0470     15
+1.3626     14
+0.0403     13
+0.6950      9
+0.6467      6
+1.1124      6
+1.0712      4
+0.0724      3
+Name: count, dtype: int64
+
+
+Value counts for AGE:
+AGE
+55    69
+53    67
+68    66
+64    64
+59    64
+      ..
+91     4
+89     3
+90     3
+98     1
+97     1
+Name: count, Length: 77, dtype: int64
+
+
+Value counts for Area:
+Area
+ON          691
+Prairies    584
+QC          522
+BC          316
+ATL         287
+North       103
+Name: count, dtype: int64</code></pre>
+<section id="sporadic-cases-of-refusal-to-answer-and-dkref-alongisde-na-and-nan-values" class="level5">
+<h5 class="anchored" data-anchor-id="sporadic-cases-of-refusal-to-answer-and-dkref-alongisde-na-and-nan-values">Sporadic cases of refusal to answer, and ‘DK/Ref’, alongisde NA and NaN values</h5>
+<p>Couple of ways to deal with this: - replace cells that contain ‘Refuse’ or ‘DK/Ref’ with na? - Maybe not the best pathway, this removes actual data, a refusal to answer is still an answer and we can’t treat it like a null value - instead, we can try to look at the demographic makeup of those who refused to answer and see if there are any patterns</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for each column, get the index of the rows that contain the string 'refuse', then, get the demographic averages </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of those rows (age, gender, province, area, education, income, employment status) to look for patterns </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Demographic profile of people who refused / didn't know, per question ----</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>REFUSE_PATTERN <span class="op">=</span> <span class="vs">r'refuse</span><span class="cf">|</span><span class="vs">dk/ref'</span>          <span class="co"># catches al of the "Don't know/Refuse", "[DO NOT READ] Refused", "Dk/Ref"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>demo_cat_cols <span class="op">=</span> [<span class="st">'Gender'</span>, <span class="st">'Education'</span>, <span class="st">'Household_income'</span>, <span class="st">'Employment_status'</span>] <span class="co"># variables I want to compare across </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Working copy: AGE is stored as text, Education has real NaNs -&gt; label them so they show up</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>eda <span class="op">=</span> df_subset.copy()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>eda[<span class="st">'AGE'</span>] <span class="op">=</span> pd.to_numeric(eda[<span class="st">'AGE'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>eda[<span class="st">'Education'</span>] <span class="op">=</span> eda[<span class="st">'Education'</span>].fillna(<span class="st">'Missing (NaN)'</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>eda[<span class="st">'Weight'</span>] <span class="op">=</span> pd.to_numeric(eda[<span class="st">'Weight'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># drop 'Most_challenge_hc' and 'Area'</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>eda.drop(columns<span class="op">=</span>[<span class="st">'Most_challenge_hc'</span>, <span class="st">'Area'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># this should be controlled earlier in the df by removing the '$' from column names</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># escape it here to make sure matplotlib doesn't process it as math column </span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> short(s, n<span class="op">=</span><span class="dv">28</span>):</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="bu">str</span>(s)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">&lt;=</span> n <span class="cf">else</span> s[:n <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> <span class="st">'…'</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_label(s, n<span class="op">=</span><span class="dv">28</span>):</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> short(s, n).replace(<span class="st">'$'</span>, <span class="vs">r'</span><span class="ch">\$</span><span class="vs">'</span>)   <span class="co"># stop matplotlib reading "$...$" as math</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Questions that actually contain a refusal-type answer (demographic columns included)</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>question_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> eda.columns</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">if</span> c <span class="op">!=</span> <span class="st">'AGE'</span> <span class="kw">and</span> eda[c].dtype <span class="op">==</span> <span class="st">'object'</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">and</span> eda[c].<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>).<span class="bu">any</span>()]</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co"># REFUSE_PATTERN = r'refuse|dk/ref' </span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>refuse_masks <span class="op">=</span> {c: eda[c].<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> c <span class="kw">in</span> question_cols}</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># # ---------- 1. Summary table: one column per question, refusers vs. everyone else ----------</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> q, m <span class="kw">in</span> refuse_masks.items():</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    ref, rest <span class="op">=</span> eda[m], eda[<span class="op">~</span>m]</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> {<span class="st">'Question'</span>: q,</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>           <span class="st">'n_refused'</span>: m.<span class="bu">sum</span>(),</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>           <span class="st">'pct_refused'</span>: <span class="bu">round</span>(<span class="dv">100</span> <span class="op">*</span> m.mean(), <span class="dv">1</span>),</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>           <span class="st">'Age_mean (ref)'</span>: <span class="bu">round</span>(ref[<span class="st">'AGE'</span>].mean(), <span class="dv">1</span>),</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>           <span class="st">'Age_mean (rest)'</span>: <span class="bu">round</span>(rest[<span class="st">'AGE'</span>].mean(), <span class="dv">1</span>),</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>           <span class="st">'Age_median (ref)'</span>: ref[<span class="st">'AGE'</span>].median(),</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>           <span class="st">'Age_median (rest)'</span>: rest[<span class="st">'AGE'</span>].median()}</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> demo_cat_cols:</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> d <span class="op">==</span> q:          <span class="co"># skip a demographic when it IS the question</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>        row[<span class="ss">f'</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">_mode (ref)'</span>] <span class="op">=</span> short(ref[d].mode().iat[<span class="dv">0</span>])</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>        row[<span class="ss">f'</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">_mode (rest)'</span>] <span class="op">=</span> short(rest[d].mode().iat[<span class="dv">0</span>])</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    rows.append(row)</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame(rows).set_index(<span class="st">'Question'</span>)</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Refusers vs. non-refusers, per question")</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="co"># display(summary.T)</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 2. Refusal rate by demographic group across all questions (heatmap) ----------</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Each cell = % of people in that demographic group who refused that question</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>REF_COLOR, REST_COLOR <span class="op">=</span> <span class="st">'#d95f02'</span>, <span class="st">'#7f8c9a'</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>rate_frames <span class="op">=</span> []</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> demo_cat_cols:</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> pd.DataFrame({q: eda.groupby(d)[q].<span class="bu">apply</span>(</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>                          <span class="kw">lambda</span> s: s.<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>).mean() <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> q <span class="kw">in</span> question_cols <span class="cf">if</span> q <span class="op">!=</span> d})</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    r.index <span class="op">=</span> pd.MultiIndex.from_product([[d], r.index.<span class="bu">map</span>(short)])</span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    rate_frames.append(r)</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>rates <span class="op">=</span> pd.concat(rate_frames)</span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">1.1</span> <span class="op">*</span> <span class="bu">len</span>(question_cols) <span class="op">+</span> <span class="dv">4</span>, <span class="fl">0.32</span> <span class="op">*</span> <span class="bu">len</span>(rates) <span class="op">+</span> <span class="fl">1.5</span>))</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> ax.imshow(rates.values, cmap<span class="op">=</span><span class="st">'Oranges'</span>, aspect<span class="op">=</span><span class="st">'auto'</span>)</span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(<span class="bu">range</span>(<span class="bu">len</span>(rates.columns)), rates.columns, rotation<span class="op">=</span><span class="dv">40</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(<span class="bu">range</span>(<span class="bu">len</span>(rates)), [plot_label(<span class="ss">f"</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">"</span>, <span class="dv">60</span>) <span class="cf">for</span> a, b <span class="kw">in</span> rates.index], fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(rates.shape[<span class="dv">0</span>]):</span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(rates.shape[<span class="dv">1</span>]):</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> rates.iat[i, j]</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pd.notna(v):</span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>            ax.text(j, i, <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.0f}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>                    color<span class="op">=</span><span class="st">'white'</span> <span class="cf">if</span> v <span class="op">&gt;</span> np.nanmax(rates.values) <span class="op">*</span> <span class="fl">0.6</span> <span class="cf">else</span> <span class="st">'black'</span>)</span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>fig.colorbar(im, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'</span><span class="sc">% o</span><span class="st">f group who refused'</span>)</span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Refusal rate (%) by demographic group and question'</span>)</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Canada_Healthcare_Survey_files/Canada_Healthcare_Survey_14_0.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+<ul>
+<li>Probably OK to remove the ‘did not refuse’ or ‘refuse to answer’, though there is some pattern to the resposnse rate of these questions:
+<ul>
+<li>Refusal was more common in Females</li>
+<li>Refusal was more common in Education and Household income; these were also more likely to refuse to answer about employment status</li>
+<li>Not necessarily indicative of low or high in either categorical variables (low education or low household income)</li>
+<li>Refusal to employment status was indicative of greater rates of refusal in other areas: access_good_hc, can_hc_improve, education, household income etc. and have_fam_doc</li>
+</ul></li>
+<li>No large confounding pattern across multiple variables, good to remove these data alongside other ‘NA’ data</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleanup rest of the dataframe to remove '1 - Terrible' and '10 - Excellent' type of data entries </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>EDGE_ENTRIES <span class="op">=</span> <span class="vs">r'1 - Terrible</span><span class="cf">|</span><span class="vs">10 - Excellent'</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cleanup_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> eda.columns</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">if</span> c <span class="op">!=</span> <span class="st">'AGE'</span> <span class="kw">and</span> eda[c].dtype <span class="op">==</span> <span class="st">'object'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">and</span> eda[c].<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>).<span class="bu">any</span>()]</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># replace cases of EDGE_ENTRIES with '1' or '10' as appropriate </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cols <span class="kw">in</span> cleanup_cols:</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    eda[cols] <span class="op">=</span> eda[cols].<span class="bu">str</span>.replace(EDGE_ENTRIES, <span class="kw">lambda</span> m: <span class="st">'10'</span> <span class="cf">if</span> m.group(<span class="dv">0</span>).startswith(<span class="st">'10'</span>) <span class="cf">else</span> <span class="st">'1'</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove any rows that contain a refusal or don't know answer in any of the columns</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># should be stored in refusal mask</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>REFUSE_PATTERN <span class="op">=</span> <span class="vs">r'refuse</span><span class="cf">|</span><span class="vs">dk/ref'</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>refuse_masks <span class="op">=</span> {c: eda[c].<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> c <span class="kw">in</span> question_cols}</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># remove refuse_masks from dataframe to create a new dataframe that only contains rows without refusals or don't know answers</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>eda <span class="op">=</span> eda[<span class="op">~</span>eda[question_cols].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.<span class="bu">str</span>.contains(REFUSE_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>)).<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove any rows that also have [DO NOT READ]</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>DNR_PATTERN <span class="op">=</span> <span class="vs">r'DO NOT READ</span><span class="cf">|</span><span class="vs">Missing</span><span class="cf">|</span><span class="vs">NaN'</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dnr_masks <span class="op">=</span> {c: eda[c].<span class="bu">str</span>.contains(DNR_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>) <span class="cf">for</span> c <span class="kw">in</span> question_cols}</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>eda <span class="op">=</span> eda[<span class="op">~</span>eda[question_cols].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.<span class="bu">str</span>.contains(DNR_PATTERN, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>)).<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eda <span class="op">=</span> eda.dropna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>eda.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>(1613, 14)</code></pre>
+<p>1613 entries across 13 variables, with refusal answers removed and likert entries cleaned up</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>eda.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+Gov_focus
+</th>
+<th>
+Current_state_eco
+</th>
+<th>
+Label
+</th>
+<th>
+Access_good_hc
+</th>
+<th>
+Can_hc_improve
+</th>
+<th>
+Hc_manage
+</th>
+<th>
+Education
+</th>
+<th>
+Household_income
+</th>
+<th>
+Employment_status
+</th>
+<th>
+Have_fam_doc
+</th>
+<th>
+Gender
+</th>
+<th>
+Province
+</th>
+<th>
+Weight
+</th>
+<th>
+AGE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+Economy
+</td>
+<td>
+8
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$100,000 to just under $150,000
+</td>
+<td>
+Retired
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Manitoba
+</td>
+<td>
+0.4657
+</td>
+<td>
+66.0
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+Education
+</td>
+<td>
+7
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+The health care system needs increased funding.
+</td>
+<td>
+College, CEGEP [SAY-JEP] or other non-universi…
+</td>
+<td>
+$80,000 to just under $100,000
+</td>
+<td>
+Self-employed
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Nova Scotia
+</td>
+<td>
+0.8577
+</td>
+<td>
+37.0
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+Economy
+</td>
+<td>
+7
+</td>
+<td>
+6
+</td>
+<td>
+Somewhat agree
+</td>
+<td>
+Worsen somewhat
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+University degree, certificate or diploma
+</td>
+<td>
+$80,000 to just under $100,000
+</td>
+<td>
+Working full-time, that is, 35 or more hours p…
+</td>
+<td>
+Yes
+</td>
+<td>
+Female
+</td>
+<td>
+British Columbia
+</td>
+<td>
+1.2259
+</td>
+<td>
+50.0
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+Jobs/Unemployment
+</td>
+<td>
+9
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Improve somewhat
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+College, CEGEP [SAY-JEP] or other non-universi…
+</td>
+<td>
+$20,000 to just under $ 40,000
+</td>
+<td>
+Retired
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Nova Scotia
+</td>
+<td>
+0.3870
+</td>
+<td>
+80.0
+</td>
+</tr>
+<tr>
+<th>
+5
+</th>
+<td>
+Economy
+</td>
+<td>
+7
+</td>
+<td>
+8
+</td>
+<td>
+Strongly agree
+</td>
+<td>
+Stay the same
+</td>
+<td>
+Current healthcare spending needs to be manage…
+</td>
+<td>
+Registered Apprenticeship or other trades cert…
+</td>
+<td>
+$150,000 and above
+</td>
+<td>
+Self-employed
+</td>
+<td>
+Yes
+</td>
+<td>
+Male
+</td>
+<td>
+Alberta
+</td>
+<td>
+0.9128
+</td>
+<td>
+36.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mixed-variable-types-with-both-ordinal-and-nominal-variables" class="level5">
+<h5 class="anchored" data-anchor-id="mixed-variable-types-with-both-ordinal-and-nominal-variables">Mixed variable types with both ordinal and nominal variables</h5>
+<ul>
+<li>Need to view all of them to see how they are arranged and properly encode them before statistical analysis</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for all columns in the dataframe, if they're 'object' dtype, print the variable name and unique values within them </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> eda.columns:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> eda[col].dtype <span class="op">==</span> <span class="st">'object'</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Variable: "</span>, col)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(eda[col].unique())</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Variable:  Gov_focus
+['Economy' 'Education' 'Jobs/Unemployment' 'Health care system' 'Other'
+ 'Social problems/Social programs/Social services' 'Crime'
+ 'Cost of living/High taxes' 'Environment' 'Debt reduction/Debt/Deficit'
+ 'Gun Controls/Registration' 'Infrastructure/Roads' 'Oil issues'
+ 'Government spending' 'Canada/Canadian citizens'
+ 'Helping elderly people/Seniors' 'Child care' 'Poverty' 'Immigration'
+ 'Laws/Justice system' 'Foreign issues' 'Aboriginal issues' 'Agriculture'
+ 'Pension issues' 'Federal/Provincial relations/Place of QC in Canada'
+ 'Welfare' 'Affordable housing' 'Family Virtues'
+ 'National security/Military/Troops']
+
+
+Variable:  Current_state_eco
+['8' '7' '9' '6' '3' '4' '5' '2' '10' '1']
+
+
+Variable:  Label
+['8' '6' '5' '3' '7' '9' '1' '4' '2' '10']
+
+
+Variable:  Access_good_hc
+['Strongly agree' 'Somewhat agree' 'Somewhat disagree' 'Strongly disagree']
+
+
+Variable:  Can_hc_improve
+['Stay the same' 'Worsen somewhat' 'Improve somewhat'
+ 'Significantly worsen' 'Significantly improve']
+
+
+Variable:  Hc_manage
+['Current healthcare spending needs to be managed more effecti'
+ 'The health care system needs increased funding.']
+
+
+Variable:  Education
+['University degree, certificate or diploma'
+ 'College, CEGEP [SAY-JEP] or other non-university certificate'
+ 'Registered Apprenticeship or other trades certificate or dip'
+ 'High School diploma or equivalent']
+
+
+Variable:  Household_income
+['$100,000 to just under $150,000' '$80,000 to just under $100,000'
+ '$20,000 to just under $ 40,000' '$150,000 and above'
+ '$40,000 to just under $ 60,000' '$60,000 to just under $ 80,000'
+ 'Under $20,000']
+
+
+Variable:  Employment_status
+['Retired' 'Self-employed'
+ 'Working full-time, that is, 35 or more hours per week'
+ 'Not in the workforce [FULL-TIME HOMEMAKER, UNEMPLOYED, NOT L'
+ 'Unemployed, but looking for work'
+ 'Working part-time, that is, less than 35 hours per week'
+ 'A student attending school full-time']
+
+
+Variable:  Have_fam_doc
+['Yes' 'No']
+
+
+Variable:  Gender
+['Male' 'Female']
+
+
+Variable:  Province
+['Manitoba' 'Nova Scotia' 'British Columbia' 'Alberta' 'Saskatchewon'
+ 'Quebec' 'Yukon Territory' 'Ontario' 'Newfoundland' 'New Brunswick'
+ 'Prince Edward Island' 'Northwestern Territory' 'Nunavut']</code></pre>
+</section>
+<section id="variable-encoding" class="level5">
+<h5 class="anchored" data-anchor-id="variable-encoding">Variable encoding</h5>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Type in model</th>
+<th>Decision and reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Label</code> → <code>hc_rating</code></td>
+<td>Ordered factor, 1–10</td>
+<td>The outcome. All 10 levels are kept; the smallest has 30 respondents.</td>
+</tr>
+<tr class="even">
+<td><code>Province</code> → <code>region</code></td>
+<td>Nominal</td>
+<td>PEI (15) and the three territories (19–24 each) are too small to estimate on their own, so provinces are grouped into 7 regions. Alberta stays separate from Manitoba/Saskatchewan because its health care politics are distinct. Ontario is the reference level.</td>
+</tr>
+<tr class="odd">
+<td><code>Gov_focus</code> → <code>gov_focus</code></td>
+<td>Nominal</td>
+<td>29 categories, many with fewer than 10 people. Grouped into 5 themes.</td>
+</tr>
+<tr class="even">
+<td><code>Access_good_hc</code> → <code>access_conf</code></td>
+<td>Numeric score, 1–4</td>
+<td>A Likert item scored 1 = strongly disagree to 4 = strongly agree.</td>
+</tr>
+<tr class="odd">
+<td><code>Can_hc_improve</code> → <code>future_outlook</code></td>
+<td>Numeric score, 1–5</td>
+<td>Scored 1 = significantly worsen to 5 = significantly improve.</td>
+</tr>
+<tr class="even">
+<td><code>Household_income</code> → <code>income</code></td>
+<td>Numeric score, 1–7</td>
+<td>Seven ordered brackets.</td>
+</tr>
+<tr class="odd">
+<td><code>Education</code> → <code>education</code></td>
+<td>Nominal</td>
+<td>Whether trades/apprenticeship ranks below or above college is debatable, so education is not forced into a single ordering.</td>
+</tr>
+<tr class="even">
+<td><code>Employment_status</code> → <code>employment</code></td>
+<td>Nominal</td>
+<td>Students (26) are merged with “not in workforce”.</td>
+</tr>
+<tr class="odd">
+<td><code>Current_state_eco</code> → <code>econ_rating</code></td>
+<td>Numeric, 1–10</td>
+<td>Same 1–10 scale as the outcome.</td>
+</tr>
+<tr class="even">
+<td><code>AGE</code> → <code>age10</code></td>
+<td>Numeric</td>
+<td>Age in decades, so the odds ratio is per 10 years.</td>
+</tr>
+<tr class="odd">
+<td><code>Hc_manage</code>, <code>Have_fam_doc</code>, <code>Gender</code></td>
+<td>Binary factors</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>We’ll do this in R but for now, lets assume that the variables are now properly encoded with nominal and ordinal variables setup
+<ul>
+<li>Ready to run eploratory data analysis, assumption tests and statistics</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="onto-exploratory-data-analysis-eda" class="level4">
+<h4 class="anchored" data-anchor-id="onto-exploratory-data-analysis-eda">Onto: Exploratory Data Analysis (EDA)</h4>
+<p>Before we take a look at statistical models and which variable best explains healthcare attitude in Canada, its best to explore a little bit of the data we’re working with. As the main reponse variable (Healthcare Attitude/‘Label’) is an ordinal variable, and most explanatory variables are ordinal themselves, a lot of the exploration will include distribution vizualization</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution of response variable, is this already a skewed response? </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(eda, x<span class="op">=</span><span class="st">'Label'</span>, category_orders <span class="op">=</span> {<span class="st">'Label'</span>: [<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>,<span class="st">'5'</span>,<span class="st">'6'</span>,<span class="st">'7'</span>,<span class="st">'8'</span>,<span class="st">'9'</span>,<span class="st">'10'</span>]})</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>fig.update_layout(title <span class="op">=</span> <span class="bu">dict</span>(text<span class="op">=</span><span class="st">"Healthcare Attitude Distribution &lt;br&gt;&lt;sup&gt; greater = more positive &lt;/sup&gt;"</span>),margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">150</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    autosize<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># write fig to html</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">"HtmlFigOutputs/Response_Var_Distribution.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe width="1200" ,="" height="600&quot;" src="HtmlFigOutputs/Response_Var_Distribution.html"></iframe>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>eda[<span class="st">'Label'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>count    1613.000000
+mean        5.939244
+std         1.899465
+min         1.000000
+25%         5.000000
+50%         6.000000
+75%         7.000000
+max        10.000000
+Name: Label, dtype: float64</code></pre>
+<ul>
+<li><p>Definitely left skewed (or negative skewed) data, with mean(sd) sitting at 5.77(1.9). Just one point of resolution between Q1,Q2,Q3, pretty evident most data sits within 5,6,7. Less resolution between Q3 and max (2 points) compared to min and Q1 (4 points)</p></li>
+<li><p>Would be interesting to see if this right skew pattern holds when separating it by demographic factors</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>groups <span class="op">=</span> [<span class="st">'Q1'</span>, <span class="st">'Q2'</span>, <span class="st">'Q3'</span>, <span class="st">'Q4'</span>]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.tab10.colors[:<span class="dv">4</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># split ages into quartiles; retbins=True also returns the age cutoffs</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>eda[<span class="st">'AGE_GROUP'</span>], age_edges <span class="op">=</span> pd.qcut(eda[<span class="st">'AGE'</span>], q<span class="op">=</span><span class="dv">4</span>, labels<span class="op">=</span>groups, retbins<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g. {'Q1': 'Q1 (18–34)', 'Q2': 'Q2 (35–49)', ...}</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>label_map <span class="op">=</span> {<span class="st">'Q1'</span>: <span class="st">'Q1 (18–42)'</span>, <span class="st">'Q2'</span>: <span class="st">'Q2 (42–54)'</span>, </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>             <span class="st">'Q3'</span>: <span class="st">'Q3 (54–64)'</span>, <span class="st">'Q4'</span>: <span class="st">'Q4 (64–97)'</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    eda, x<span class="op">=</span><span class="st">'Label'</span>, color<span class="op">=</span><span class="st">'Gender'</span>, facet_col<span class="op">=</span><span class="st">'AGE_GROUP'</span>,</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    category_orders<span class="op">=</span>{<span class="st">'AGE_GROUP'</span>: groups, <span class="st">'Label'</span>: [<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>,<span class="st">'5'</span>,<span class="st">'6'</span>,<span class="st">'7'</span>,<span class="st">'8'</span>,<span class="st">'9'</span>,<span class="st">'10'</span>]}, labels <span class="op">=</span> {<span class="st">'Label'</span>:<span class="st">''</span>}</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>fig.update_layout(title <span class="op">=</span> <span class="bu">dict</span>(text<span class="op">=</span><span class="st">"Healthcare Attitude Across Age Quartiles and Gender &lt;br&gt;&lt;sup&gt;(X-Axis =&gt; higher is more positive attitude)1&lt;/sup&gt;"</span>),</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>                  margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">150</span>),autosize<span class="op">=</span><span class="va">False</span>, width<span class="op">=</span><span class="dv">1200</span>, height<span class="op">=</span><span class="dv">600</span>, barmode<span class="op">=</span><span class="st">'overlay'</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>fig.for_each_annotation(</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> a: a.update(text<span class="op">=</span>label_map[a.text.split(<span class="st">'='</span>)[<span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>fig.update_traces(opacity <span class="op">=</span> <span class="fl">0.80</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">"HtmlFigOutputs/Response_Var_Across_AgeQuartile_Gender.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe width="1200" ,="" height="600&quot;" src="HtmlFigOutputs/Response_Var_Across_AgeQuartile_Gender.html"></iframe>
+<p>No large change in healthcare attitude across age groups (group sizes also relatively balanced), certainly there are more 1-2-3 in older groups (&gt;54yrs) but not enough the change the distribution of healthcare attitude (in general). All age groups still have similar healthcare attitude reponses</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(eda, x<span class="op">=</span><span class="st">'Label'</span>, color<span class="op">=</span><span class="st">'Household_income'</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                   category_orders<span class="op">=</span>{<span class="st">'Household_income'</span>: [<span class="st">'Under $20,000'</span>,<span class="st">'$20,000 to just under $ 40,000'</span>, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">'$40,000 to just under $ 60,000'</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">'$60,000 to just under $ 80,000'</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">'$80,000 to just under $100,000'</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">'$100,000 to just under $150,000'</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">'$150,000 and above'</span>], </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Label'</span>: [<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>,<span class="st">'5'</span>,<span class="st">'6'</span>,<span class="st">'7'</span>,<span class="st">'8'</span>,<span class="st">'9'</span>,<span class="st">'10'</span>]}, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Label'</span>:<span class="st">'Healthcare Attitude &lt;br&gt; (greater = more positive)'</span>}, </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>                   histnorm<span class="op">=</span><span class="st">'probability density'</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>fig.update_layout(title <span class="op">=</span> <span class="bu">dict</span>(text<span class="op">=</span><span class="st">"Healthcare attitude across income levels &lt;br&gt;&lt;sup&gt; (density is shown rather than count to normalize across group sizes)"</span>),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                  margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">150</span>),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    autosize<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    barmode<span class="op">=</span><span class="st">'overlay'</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>fig.update_traces(opacity<span class="op">=</span><span class="fl">0.80</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">"HtmlFigOutputs/IncomeLevelsDistribution.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe width="1200" ,="" height="600&quot;" src="HtmlFigOutputs/IncomeLevelsDistribution.html"></iframe>
+<p>This is an interesting distribution. From a count perspective there is greater negative sentiment with those making under $20,000 than any other group. The group that has the greatest count for 10 (most positive) in Healthcare Attitude is the $20,000 - $40,000 group, just one ‘unit’ higher in the income bracket. Although the count data is imbalanced between the groups, it is noteworthy to see a difference in this distribtuion from the lowest income bracket to the next lowest.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What about current access to healthcare? </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(eda, x<span class="op">=</span><span class="st">"Label"</span>, color <span class="op">=</span> <span class="st">'Access_good_hc'</span>, category_orders <span class="op">=</span> {<span class="st">'Label'</span>: [<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>,<span class="st">'5'</span>,<span class="st">'6'</span>,<span class="st">'7'</span>,<span class="st">'8'</span>,<span class="st">'9'</span>,<span class="st">'10'</span>]}, histnorm<span class="op">=</span><span class="st">'probability density'</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fig.update_layout(title <span class="op">=</span> <span class="bu">dict</span>(text<span class="op">=</span><span class="st">"Healthcare Access and Attitude"</span> <span class="st">"&lt;br&gt;&lt;sup&gt;(X-Axis =&gt; higher is more positive attitude)&lt;/sup&gt;"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                  margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">150</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                  autosize<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                  width<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                  height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                  barmode<span class="op">=</span><span class="st">'overlay'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>fig.update_traces(opacity <span class="op">=</span> <span class="fl">0.80</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">"HtmlFigOutputs/Responsevar_AccessHCDistribution.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe width="1200" ,="" height="600&quot;" src="HtmlFigOutputs/Responsevar_AccessHCDistribution.html"></iframe>
+<p>It looks like this is where some of the greater variances in responses are observed. We see three different types of distributions here: left-shited distributions on ‘Strongly disagree’ (purple) and right-shifted in ‘Strongly agree’ (blue), centrally distributed (somewhat agree/disagree), although even the middle reponses of somewhat agree and disagree are pulled to their respetive positive and negative sides.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> eda.dropna(subset<span class="op">=</span>[<span class="st">'Label'</span>]).groupby(<span class="st">'Province'</span>).size()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>n.index <span class="op">=</span> n.index.astype(<span class="bu">str</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(eda, x<span class="op">=</span><span class="st">'Label'</span>, y<span class="op">=</span><span class="st">'Weight'</span>, histfunc<span class="op">=</span><span class="st">'sum'</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                   facet_col<span class="op">=</span><span class="st">'Province'</span>, facet_col_wrap<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                   category_orders<span class="op">=</span>{<span class="st">'Label'</span>: [<span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span>,<span class="st">'4'</span>,<span class="st">'5'</span>,<span class="st">'6'</span>,<span class="st">'7'</span>,<span class="st">'8'</span>,<span class="st">'9'</span>,<span class="st">'10'</span>]},</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                   histnorm<span class="op">=</span><span class="st">'probability'</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                   labels<span class="op">=</span>{<span class="st">'Label'</span>: <span class="st">''</span>, <span class="st">'Weight'</span>:<span class="st">''</span>}, facet_row_spacing<span class="op">=</span><span class="fl">0.2</span>,)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>fig.for_each_annotation(<span class="kw">lambda</span> a: a.update(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>a<span class="sc">.</span>text<span class="sc">.</span>split(<span class="st">'='</span>)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss"> &lt;br&gt; (n=</span><span class="sc">{</span>n[a.text.split(<span class="st">'='</span>)[<span class="op">-</span><span class="dv">1</span>]]<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Weighted sum'</span>, row <span class="op">=</span> <span class="dv">1</span> , col <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>fig.update_yaxes(title_text<span class="op">=</span><span class="st">'Weighted sum'</span>, row <span class="op">=</span> <span class="dv">2</span> , col <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="bu">dict</span>(text<span class="op">=</span><span class="st">"Healthcare attitude across provinces"</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&lt;br&gt;&lt;sup&gt;(greater xaxis = more positive healthcare attitude | y-axis adj. with survey weights)&lt;/sup&gt;"</span>),</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">150</span>), autosize<span class="op">=</span><span class="va">False</span>, width<span class="op">=</span><span class="dv">1200</span>, height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">"HtmlFigOutputs/ProvincialDistribution.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<iframe width="1200" ,="" height="600&quot;" src="HtmlFigOutputs/ProvincialDistribution.html"></iframe>
+<p>Certainly, we see some middle distributions in Alberta and Quebec, compared to Ontario. Unsure if provincially or territorially there would be any changes or differences in Healthcare Attitude from these distributions. We can also look at the sample size counts for each province and see that we can combine some of them to have fewer levels in this group with greater sample sizes (better for statistical modelling later on to avoid instances of no values in specific groups)</p>
+<section id="weights" class="level5">
+<h5 class="anchored" data-anchor-id="weights">Weights</h5>
+<ul>
+<li>Survey data like this also has survey weights. Although I didn’t use it to adjust the variables (except provincial data above) during EDA, it’s important to consider this variable when designing statistical tests
+<ul>
+<li>The function of survey weight is to further control for sampling bias in a survey, particularly one that aims to make some sort of generalization about a country rather than the sample respondents</li>
+<li>As all surveys may not represent the population exactly, some may be skewed with too many educated respondents, or too many cases sampled from the territories compared to largeer provinces (thus having a minority oversample!)</li>
+<li>The weight value helps control for this</li>
+</ul></li>
+<li>It is too much to display what each variable changes based on it’s weight so below is a quick summary table of what percentage shift we observed when using weighted variable adjustments vs unweighted</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weight_shift(df, cols, w<span class="op">=</span><span class="st">'Weight'</span>):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> {}</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> cols:</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pd.api.types.is_numeric_dtype(df[c]):</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>            <span class="co"># continuous: shift in mean, in SD units</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>            d <span class="op">=</span> df[[c, w]].dropna()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>            wm <span class="op">=</span> np.average(d[c], weights<span class="op">=</span>d[w])</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>            out[c] <span class="op">=</span> <span class="bu">abs</span>(wm <span class="op">-</span> d[c].mean()) <span class="op">/</span> d[c].std()</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># categorical/ordinal: largest shift in any category's proportion</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>            u <span class="op">=</span> df[c].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>            wt <span class="op">=</span> df.groupby(c)[w].<span class="bu">sum</span>() <span class="op">/</span> df.loc[df[c].notna(), w].<span class="bu">sum</span>()</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>            out[c] <span class="op">=</span> (wt <span class="op">-</span> u).<span class="bu">abs</span>().<span class="bu">max</span>()</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(out).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Largest shift in weighted vs unweight percentage of each category:: "</span>, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># skip the weight column and AGE, index = 13,14</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>weight_shift(eda, eda.columns[<span class="dv">0</span>:<span class="dv">12</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Largest shift in weighted vs unweight percentage of each category::  
+
+
+
+
+
+
+Employment_status    0.111875
+Province             0.110053
+Label                0.025662
+Current_state_eco    0.022679
+Household_income     0.021238
+Education            0.020648
+Gov_focus            0.015144
+Can_hc_improve       0.009875
+Access_good_hc       0.007538
+Have_fam_doc         0.003008
+Gender               0.000973
+Hc_manage            0.000230
+dtype: float64</code></pre>
+<p>Employment_status and Province has moderate shifts (around 11% difference) between weighted and unweighted values. A good idea to see which groups are getting attenuated in the weights and which groups are being amplified</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="st">'Province'</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> eda[c].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>wt <span class="op">=</span> eda.groupby(c)[<span class="st">'Weight'</span>].<span class="bu">sum</span>() <span class="op">/</span> eda.loc[eda[c].notna(), <span class="st">'Weight'</span>].<span class="bu">sum</span>()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'unweighted'</span>: u, <span class="st">'weighted'</span>: wt, <span class="st">'diff'</span>: wt <span class="op">-</span> u}).sort_values(<span class="st">'diff'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+unweighted
+</th>
+<th>
+weighted
+</th>
+<th>
+diff
+</th>
+</tr>
+<tr>
+<th>
+Province
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+Ontario
+</th>
+<td>
+0.276503
+</td>
+<td>
+0.386556
+</td>
+<td>
+0.110053
+</td>
+</tr>
+<tr>
+<th>
+Quebec
+</th>
+<td>
+0.213887
+</td>
+<td>
+0.245487
+</td>
+<td>
+0.031600
+</td>
+</tr>
+<tr>
+<th>
+British Columbia
+</th>
+<td>
+0.122133
+</td>
+<td>
+0.128909
+</td>
+<td>
+0.006776
+</td>
+</tr>
+<tr>
+<th>
+Prince Edward Island
+</th>
+<td>
+0.009299
+</td>
+<td>
+0.007724
+</td>
+<td>
+-0.001576
+</td>
+</tr>
+<tr>
+<th>
+Newfoundland
+</th>
+<td>
+0.024799
+</td>
+<td>
+0.018711
+</td>
+<td>
+-0.006088
+</td>
+</tr>
+<tr>
+<th>
+Nunavut
+</th>
+<td>
+0.011779
+</td>
+<td>
+0.001043
+</td>
+<td>
+-0.010736
+</td>
+</tr>
+<tr>
+<th>
+Yukon Territory
+</th>
+<td>
+0.011779
+</td>
+<td>
+0.000735
+</td>
+<td>
+-0.011044
+</td>
+</tr>
+<tr>
+<th>
+Northwestern Territory
+</th>
+<td>
+0.014879
+</td>
+<td>
+0.000940
+</td>
+<td>
+-0.013939
+</td>
+</tr>
+<tr>
+<th>
+Saskatchewon
+</th>
+<td>
+0.056417
+</td>
+<td>
+0.041664
+</td>
+<td>
+-0.014752
+</td>
+</tr>
+<tr>
+<th>
+New Brunswick
+</th>
+<td>
+0.039058
+</td>
+<td>
+0.022643
+</td>
+<td>
+-0.016414
+</td>
+</tr>
+<tr>
+<th>
+Manitoba
+</th>
+<td>
+0.057657
+</td>
+<td>
+0.038961
+</td>
+<td>
+-0.018695
+</td>
+</tr>
+<tr>
+<th>
+Nova Scotia
+</th>
+<td>
+0.050217
+</td>
+<td>
+0.028034
+</td>
+<td>
+-0.022183
+</td>
+</tr>
+<tr>
+<th>
+Alberta
+</th>
+<td>
+0.111593
+</td>
+<td>
+0.078593
+</td>
+<td>
+-0.033000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="st">'Employment_status'</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> eda[c].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>wt <span class="op">=</span> eda.groupby(c)[<span class="st">'Weight'</span>].<span class="bu">sum</span>() <span class="op">/</span> eda.loc[eda[c].notna(), <span class="st">'Weight'</span>].<span class="bu">sum</span>()</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'unweighted'</span>: u, <span class="st">'weighted'</span>: wt, <span class="st">'diff'</span>: wt <span class="op">-</span> u}).sort_values(<span class="st">'diff'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+unweighted
+</th>
+<th>
+weighted
+</th>
+<th>
+diff
+</th>
+</tr>
+<tr>
+<th>
+Employment_status
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+Working full-time, that is, 35 or more hours per week
+</th>
+<td>
+0.396156
+</td>
+<td>
+0.457794
+</td>
+<td>
+0.061638
+</td>
+</tr>
+<tr>
+<th>
+Unemployed, but looking for work
+</th>
+<td>
+0.050217
+</td>
+<td>
+0.066585
+</td>
+<td>
+0.016368
+</td>
+</tr>
+<tr>
+<th>
+A student attending school full-time
+</th>
+<td>
+0.016119
+</td>
+<td>
+0.029350
+</td>
+<td>
+0.013231
+</td>
+</tr>
+<tr>
+<th>
+Working part-time, that is, less than 35 hours per week
+</th>
+<td>
+0.080595
+</td>
+<td>
+0.089288
+</td>
+<td>
+0.008693
+</td>
+</tr>
+<tr>
+<th>
+Not in the workforce [FULL-TIME HOMEMAKER, UNEMPLOYED, NOT L
+</th>
+<td>
+0.055797
+</td>
+<td>
+0.063516
+</td>
+<td>
+0.007720
+</td>
+</tr>
+<tr>
+<th>
+Self-employed
+</th>
+<td>
+0.104154
+</td>
+<td>
+0.108379
+</td>
+<td>
+0.004225
+</td>
+</tr>
+<tr>
+<th>
+Retired
+</th>
+<td>
+0.296962
+</td>
+<td>
+0.185088
+</td>
+<td>
+-0.111875
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These results are to be expected. Ontario was actually <em>under-represented</em> in the dataset and so the difference of 0.11 shifts the Ontario based values higher to better represent the country’s population. In Employment_status, the ‘Retired’ group was probably over sampled and thus the weights are negative (-0.11) effectively attenuating the ‘Retired’ group and amplifying the ‘Working full time’ group.</p>
+<p>All these will be helpful in generalizing the statistical results of investigating which of these variables best explain Healthcare Attitude in Canada</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write final dataframes to csv for statistical analysis</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>eda.to_csv(<span class="st">'Canada_Healthcare_Survey_Cleaned.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Alternatively, we can also look at our data table using the ydata_profiling package in Python</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ydata_profiling <span class="im">import</span> ProfileReport</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>profile <span class="op">=</span> ProfileReport(eda, title<span class="op">=</span><span class="st">"YData Profiling Report"</span>, explorative<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>profile.to_file(<span class="st">"EDA_report.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Summarize dataset:   0%|          | 0/5 [00:00&lt;?, ?it/s]
+
+
+100%|██████████| 14/14 [00:00&lt;00:00, 90.90it/s]
+
+
+
+Generate report structure:   0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+Render HTML:   0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+Export report to file:   0%|          | 0/1 [00:00&lt;?, ?it/s]</code></pre>
+</section>
+</section>
+<section id="onto-statistical-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="onto-statistical-analysis">Onto: Statistical Analysis</h4>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
